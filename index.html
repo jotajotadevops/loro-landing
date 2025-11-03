@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loro · Integramos IA en tu negocio</title>
+  <meta name="description" content="Loro: Integramos IA en tu negocio, de verdad, sin vueltas. n8n + Chatwoot + OpenAI para automatizar ventas y soporte." />
+  <!-- Tip: Si subes la página a un hosting con dominio propio agrega favicon y meta OG -->
+
+  <style>
+    /* =============================
+       🎨 PALETA LORO (editá acá)
+       ============================= */
+    :root{
+      --loro-navy: #0B3A5A;      /* azul profundo del logotipo */
+      --loro-green: #22C55E;     /* verde principal */
+      --loro-teal: #14B8A6;      /* verde-agua/teal secundario */
+      --ink-900: #0a1f2b;        /* texto principal oscuro */
+      --ink-700: #2b4657;        /* texto secundario */
+      --ink-500: #577284;        /* texto suave */
+      --bg: #F6FAF8;             /* fondo base claro */
+      --card: #ffffff;           /* fondo de tarjetas */
+      --muted: #e7f4ef;          /* sutil para badges y líneas */
+      --shadow: 0 10px 30px rgba(11,58,90,.10);
+      --radius: 16px;
+    }
+
+    /* Reset mínimo */
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink-900);
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(34,197,94,.08), transparent),
+                  radial-gradient(1000px 500px at 110% -10%, rgba(20,184,166,.10), transparent),
+                  var(--bg);
+      line-height:1.5;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1100px, 92%);margin-inline:auto}
+    .btn{
+      display:inline-block;
+      padding:.9rem 1.2rem;
+      border-radius:999px;
+      background: linear-gradient(135deg, var(--loro-green), var(--loro-teal));
+      color:#fff;font-weight:700;letter-spacing:.2px;
+      box-shadow: var(--shadow);
+      transition:.2s transform ease, .2s filter ease;
+    }
+    .btn:hover{transform:translateY(-2px);filter:saturate(1.05)}
+    .btn.outline{
+      background: transparent;
+      color: var(--loro-navy);
+      border:2px solid var(--loro-teal);
+    }
+
+    /* =============================
+       Encabezado / Navegación
+       ============================= */
+    header{
+      position:sticky;top:0;z-index:50;background:rgba(246,250,248,.8);backdrop-filter: blur(8px);
+      border-bottom:1px solid #edf5f1
+    }
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}
+    .brand{display:flex;align-items:center;gap:.6rem}
+    .brand img{height:38px;width:auto}
+    .brand strong{font-size:1.05rem;color:var(--loro-navy)}
+    .nav a{font-weight:600;color:var(--ink-700)}
+    .navlinks{display:flex;gap:1.2rem;align-items:center}
+
+    /* =============================
+       Hero
+       ============================= */
+    .hero{padding: clamp(3rem, 6vw, 6rem) 0 2.5rem}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center}
+    .kicker{color:var(--loro-teal);font-weight:800;letter-spacing:.2px;text-transform:uppercase;font-size:.85rem}
+    h1{font-size: clamp(2rem, 3.6vw, 3.2rem);line-height:1.1;margin:.4rem 0 1rem;color:var(--loro-navy)}
+    .lead{font-size: clamp(1rem, 1.3vw, 1.15rem);color:var(--ink-700);max-width:58ch}
+    .cta-row{display:flex;gap:.8rem;align-items:center;margin-top:1.4rem;flex-wrap:wrap}
+    .hero-card{background:var(--card);border-radius:var(--radius);padding:1.2rem;box-shadow: var(--shadow)}
+    .pill{display:inline-flex;gap:.4rem;align-items:center;background:var(--muted);color:var(--loro-navy);padding:.35rem .7rem;border-radius:999px;font-size:.82rem;font-weight:700}
+
+    /* =============================
+       Secciones
+       ============================= */
+    section{padding: clamp(2.4rem, 5vw, 4rem) 0}
+    .section-title{font-size:clamp(1.6rem, 2.6vw, 2rem);margin:0 0 1rem;color:var(--loro-navy)}
+    .section-desc{color:var(--ink-700);max-width:65ch}
+
+    /* Qué hacemos */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.4rem}
+    .card{background:var(--card);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow)}
+    .card h3{margin:.2rem 0 .4rem}
+    .card p{color:var(--ink-700)}
+
+    /* Herramientas */
+    .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.2rem}
+    .tool{background:linear-gradient(180deg,#fff, #f7fbfa);border:1px solid #eaf4f0;border-radius:var(--radius);padding:1rem;display:flex;gap:.9rem;align-items:center}
+    .badge{font-size:.8rem;font-weight:800;color:#0b3a5a;background:#e9f7f3;border:1px solid #d3efe7;padding:.2rem .5rem;border-radius:8px}
+
+    /* Proceso */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.4rem}
+    .step{background:var(--card);padding:1rem;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .step b{display:inline-block;background:var(--muted);padding:.2rem .5rem;border-radius:6px;margin-bottom:.4rem;color:var(--loro-navy)}
+
+    /* Arquitectura */
+    .architecture{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:center}
+    .arch-img{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:1rem}
+
+    /* CTA Bloque */
+    .cta-block{background:linear-gradient(135deg, rgba(20,184,166,.10), rgba(34,197,94,.12));border:1px solid #d6efe7;border-radius:var(--radius);padding:1.4rem;display:flex;flex-wrap:wrap;align-items:center;gap:1rem;justify-content:space-between}
+
+    /* FAQ */
+    details{background:var(--card);border:1px solid #eaf4f0;border-radius:12px;padding:.9rem 1rem;box-shadow:var(--shadow)}
+    summary{font-weight:700;cursor:pointer}
+    .faq{display:grid;grid-template-columns:1fr;gap:.8rem;margin-top:1.2rem}
+
+    /* Pie */
+    footer{padding:2rem 0;border-top:1px solid #eaf4f0;color:var(--ink-500)}
+
+    /* Responsive */
+    @media (max-width: 992px){
+      .hero-grid{grid-template-columns:1fr}
+      .cards, .tools, .steps{grid-template-columns:1fr 1fr}
+      .architecture{grid-template-columns:1fr}
+    }
+    @media (max-width: 600px){
+      .cards, .tools, .steps{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================
+       HEADER – LOGO + NAVEGACIÓN
+       Comentarios: cambiá los anchors si sumás nuevas secciones.
+  ============================== -->
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Loro Inicio">
+        <!-- 📌 Colocá el archivo del logo en la misma carpeta y mantené el nombre o cambialo aquí -->
+        <img src="Logo Loro.png" alt="Loro logo" />
+        <strong>Loro</strong>
+      </a>
+      <nav class="navlinks">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="#faq">FAQs</a>
+        <a class="btn outline" href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =============================
+       HERO / PORTADA
+       Tip: Editá título, bajada y bullets a gusto.
+  ============================== -->
+  <main id="top" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="kicker">Automatización con n8n · Chatwoot · OpenAI</span>
+        <h1>Integramos IA en tu negocio,<br/>de verdad, sin vueltas.</h1>
+        <p class="lead">Diseñamos e implementamos agentes conversacionales y flujos automatizados que atienden, venden y documentan <b>de punta a punta</b>. En semanas, no meses. Sin palabras raras: resultados.</p>
+        <div class="cta-row">
+          <a id="btn-cta" class="btn" href="#contacto">Quiero hablar por WhatsApp</a>
+          <span class="pill">Implementaciones reales · LATAM</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="pill" style="margin-bottom:.6rem">Qué resolvemos</div>
+        <ul>
+          <li>✅ Responder consultas 24/7 en WhatsApp, IG y web.</li>
+          <li>✅ Tomar pedidos y registrarlos en tus planillas o sistema.</li>
+          <li>✅ Escalar a humano en un clic cuando hace falta.</li>
+          <li>✅ Métricas de conversación y mejoras continuas.</li>
+        </ul>
+        <small style="color:var(--ink-500)">Tech stack: n8n · Chatwoot · OpenAI (GPT) · Google Sheets/DB · Webhooks</small>
+      </div>
+    </div>
+  </main>
+
+  <!-- =============================
+       QUÉ HACEMOS / SERVICIOS
+  ============================== -->
+  <section id="servicios">
+    <div class="container">
+      <h2 class="section-title">Qué hacemos</h2>
+      <p class="section-desc">Implementamos automatizaciones conversacionales y operativas que conectan tus canales con tus datos. Empezamos simple, pero bien: un MVP en producción que ya genera valor y se puede iterar.</p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Agentes en WhatsApp</h3>
+          <p>Responden preguntas frecuentes, recomiendan productos y toman pedidos. Pueden <b>derivar a humano</b> cuando corresponde via Chatwoot.</p>
+        </article>
+        <article class="card">
+          <h3>Automatización de procesos</h3>
+          <p>Flujos con <b>n8n</b>: alta de clientes, recordatorios, envíos de documentos, integraciones con planillas y APIs.</p>
+        </article>
+        <article class="card">
+          <h3>Entrenamiento y mejora continua</h3>
+          <p>Medimos, ajustamos prompts y herramientas, y afinamos el modelo para tu operación real.</p>
+        </article>
+      </div>
+
+      <div class="tools">
+        <div class="tool">
+          <span class="badge">n8n</span>
+          <div>
+            <b>Orquestación</b>
+            <div style="color:var(--ink-700)">Automatizamos pasos, conectamos apps y almacenamos memoria.</div>
+          </div>
+        </div>
+        <div class="tool">
+          <span class="badge">Chatwoot</span>
+          <div>
+            <b>Inbox Omnicanal</b>
+            <div style="color:var(--ink-700)">Centralizamos WhatsApp/IG/Web y colaboramos con tu equipo.</div>
+          </div>
+        </div>
+        <div class="tool">
+          <span class="badge">OpenAI</span>
+          <div>
+            <b>Modelos GPT</b>
+            <div style="color:var(--ink-700)">Respuestas naturales, herramientas y control del tono.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================
+       PROCESO
+  ============================== -->
+  <section id="proceso">
+    <div class="container">
+      <h2 class="section-title">Cómo trabajamos</h2>
+      <p class="section-desc">Proceso claro para avanzar rápido y con foco en impacto.</p>
+      <div class="steps">
+        <div class="step"><b>1 · Descubrimiento</b><div>Entendemos tu operación, definimos objetivos y elegimos el primer flujo a automatizar.</div></div>
+        <div class="step"><b>2 · Diseño</b><div>Diseño del prompt del agente, herramientas (tools) y conexiones necesarias.</div></div>
+        <div class="step"><b>3 · MVP</b><div>Subimos un piloto funcional en tu negocio y lo medimos en vivo.</div></div>
+        <div class="step"><b>4 · Iteración</b><div>Mejora contínua, nuevas herramientas y training con datos reales.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================
+       ARQUITECTURA (usa tu imagen adjunta)
+       💡 Asegurate de subir la imagen al mismo folder.
+  ============================== -->
+  <section id="arquitectura">
+    <div class="container architecture">
+      <div>
+        <h2 class="section-title">Arquitectura simple, robusta</h2>
+        <p class="section-desc">Chatwoot conecta tus canales (WhatsApp, IG, web) con un flujo en <b>n8n</b>. Allí orquestamos el agente con <b>OpenAI</b> y las herramientas que necesite (planillas, bases, APIs). Si hace falta, se deriva a humano en la misma bandeja.</p>
+        <div class="cta-row">
+          <a class="btn" href="#contacto">Quiero implementarlo</a>
+          <a class="btn outline" href="#faq">Ver preguntas frecuentes</a>
+        </div>
+      </div>
+      <div class="arch-img">
+        <!-- 📌 Reemplazá por el nombre real del archivo de tu diagrama si cambió -->
+        <img src="8c8178f0-0ebf-46d5-b14c-59bbdd2d069a.png" alt="Esquema arquitectura Loro" />
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================
+       CTA INTERMEDIA
+  ============================== -->
+  <section>
+    <div class="container cta-block">
+      <div>
+        <h3 style="margin:0;color:var(--loro-navy)">¿Tenés un caso puntual en mente?</h3>
+        <div style="color:var(--ink-700)">Escribinos por WhatsApp y te contamos cómo lo hacemos en tu negocio.</div>
+      </div>
+      <a class="btn" id="btn-cta-2" href="#contacto">Hablar ahora</a>
+    </div>
+  </section>
+
+  <!-- =============================
+       FAQ
+  ============================== -->
+  <section id="faq">
+    <div class="container">
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <div class="faq">
+        <details>
+          <summary>¿En cuánto tiempo vemos algo funcionando?</summary>
+          <div>Apuntamos a un MVP en 1–2 semanas con un flujo clave (ej. consultas + toma de pedido simple) y luego iteramos.</div>
+        </details>
+        <details>
+          <summary>¿Necesito un e‑commerce o CRM?</summary>
+          <div>No. Podemos empezar con Google Sheets y webhooks. Si ya tenés sistemas, nos integramos.</div>
+        </details>
+        <details>
+          <summary>¿Se puede pasar a humano?</summary>
+          <div>Sí. Chatwoot permite asignar la conversación a tu equipo y mantener el historial completo.</div>
+        </details>
+        <details>
+          <summary>¿Cómo manejan la privacidad?</summary>
+          <div>Usamos buenas prácticas de minimización de datos y acceso limitado. Compartimos el detalle en el kickoff.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================
+       CONTACTO / WHATSAPP
+       ℹ️ Editá el número y el mensaje por defecto abajo en JS.
+  ============================== -->
+  <section id="contacto">
+    <div class="container">
+      <h2 class="section-title">Hablemos</h2>
+      <p class="section-desc">Contanos brevemente tu negocio y qué te gustaría automatizar. Te respondemos a la brevedad.</p>
+
+      <div class="card" style="display:grid;gap:.8rem">
+        <label for="wa-number"><b>WhatsApp</b> (mostrado en la página)</label>
+        <!-- 📌 Este input es informativo; podés ocultarlo si querés hardcodear el número. -->
+        <input id="wa-number" type="text" value="+54 9 11 2345 6789" style="padding:.8rem;border:1px solid #dceae4;border-radius:10px" />
+        <small style="color:var(--ink-500)">Formato libre; el enlace se genera limpiando espacios y símbolos.</small>
+
+        <!-- Botón principal de WhatsApp -->
+        <a id="wa-button" class="btn" href="#">Escribir por WhatsApp</a>
+
+        <!-- Comentario: si no querés mostrar el input, eliminá las 3 líneas anteriores y
+             reemplazá el href del botón por "https://wa.me/5491123456789?text=Hola%20Loro..." -->
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <img src="Logo Loro.png" alt="Logo Loro" style="height:26px"/>
+        <b>Loro</b>
+      </div>
+      <div>© <span id="year"></span> Loro · "Integramos IA en tu negocio, de verdad, sin vueltas."</div>
+    </div>
+  </footer>
+
+  <script>
+    // =============================
+    // JS mínimo para:
+    // 1) Generar el enlace de WhatsApp con número y mensaje.
+    // 2) Scroll suave en los anchors.
+    // 3) Año del footer.
+    // =============================
+
+    // 1) WhatsApp
+    // ✏️ Mensaje por defecto (editá el texto a gusto)
+    const DEFAULT_MESSAGE = "Hola Loro, quiero integrar IA en mi negocio. Soy __, de __. Mi idea es automatizar __";
+
+    function normalizePhone(raw){
+      return (raw || "").replace(/[^0-9]/g, "");
+    }
+
+    function buildWaLink(){
+      const visible = document.getElementById('wa-number').value;
+      const digits = normalizePhone(visible);
+      const msg = encodeURIComponent(DEFAULT_MESSAGE);
+      if(!digits){return '#'}
+      return `https://wa.me/${digits}?text=${msg}`;
+    }
+
+    function updateWa(){
+      const a = document.getElementById('wa-button');
+      a.href = buildWaLink();
+    }
+
+    document.getElementById('wa-number').addEventListener('input', updateWa);
+    updateWa(); // inicial
+
+    // 2) Scroll suave para anchors internos
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          const el = document.querySelector(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+        }
+      })
+    })
+
+    // 3) Año dinámico
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
