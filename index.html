@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Loro · Integramos IA en tu negocio</title>
-  <meta name="description" content="Loro: Integramos IA en tu negocio con OpenAI y WhatsApp Business. Automatizá ventas y soporte con flujos conversacionales (n8n + Chatwoot)." />
+  <meta name="description" content="Loro: Integramos IA en tu negocio con OpenAI y WhatsApp Business. Automatizá ventas y soporte con flujos conversacionales." />
   <meta name="robots" content="index,follow" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Loro · Integramos IA en tu negocio" />
@@ -12,32 +12,131 @@
   <meta property="og:image" content="https://dummyimage.com/1200x630/0b0f12/f4f7f8.png&text=Loro" />
   <link rel="icon" href="favicon.ico" />
   <style>
-    /* ===== Estética FaunaFlora adaptada a Loro (sin dependencias) ===== */
-    :root{
-      --bg:#0b0f12; --ink:#f4f7f8; --muted:rgba(255,255,255,.70);
-      --card:#0f151a; --line:rgba(255,255,255,.08); --accent:#22C55E;
-    }
-    *{box-sizing:border-box} html,body{margin:0;padding:0}
-    body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1140px;margin:0 auto;padding:0 20px}
-    .muted{color:var(--muted)}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.1rem;border-radius:12px;font-weight:600;gap:.5rem}
-    .btn-accent{background:var(--accent);color:#0b0f12}
-    .btn-ghost{border:1px solid rgba(255,255,255,.15)}
-    header.sticky{position:sticky;top:0;z-index:40;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;gap:18px;align-items:center}
-    .nav a{opacity:.9}.nav a:hover{opacity:1}
-    .grid{display:grid;gap:28px}
-    .g12{grid-template-columns:repeat(12,1fr)}
-    .g4{grid-template-columns:repeat(4,1fr)}
-    .g3{grid-template-columns:repeat(3,1fr)}
-    .g2{grid-template-columns:repeat(2,1fr)}
-    @media (max-width:960px){
-      .hide-md{display:none}
-      .g12,.g4,.g3,.g2{grid-template-columns:1fr}
-    }
+/* ============ Base “Loro” – estética sobria/seria, accesible y responsive ============ */
+
+/* 1) Reset moderno y tipografía */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+     -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* 2) Paleta y tokens */
+:root{
+  --bg:#0b0f12;          /* fondo principal */
+  --bg-soft:#0f151a;     /* tarjetas/contraste suave */
+  --ink:#f4f7f8;         /* texto principal */
+  --ink-2:#c9d2d8;       /* texto secundario */
+  --line:#1b242c;        /* líneas/bordes discretos */
+  --accent:#22C55E;      /* acción/llamado */
+  --danger:#ef4444;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --container:1140px;
+  --sp-1:.5rem; --sp-2:.75rem; --sp-3:1rem; --sp-4:1.25rem; --sp-5:1.75rem; --sp-6:2.5rem; --sp-7:4rem;
+}
+
+@media (min-width:960px){
+  :root{ --sp-6:3rem; --sp-7:5rem }
+}
+
+/* 3) Colores generales */
+body{background:var(--bg); color:var(--ink)}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; height:auto; display:block}
+
+/* 4) Tipografía y escalas */
+h1,h2,h3,h4{margin:0 0 var(--sp-3); line-height:1.15}
+h1{font-size:clamp(2rem,4vw,3rem); font-weight:800}
+h2{font-size:clamp(1.5rem,2.6vw,2rem); font-weight:700}
+h3{font-size:1.25rem; font-weight:650}
+p{margin:0 0 var(--sp-3); color:var(--ink-2)}
+small,.muted{color:var(--ink-2)}
+strong{font-weight:700}
+
+/* 5) Layout helpers */
+.container{max-width:var(--container); margin-inline:auto; padding-inline:var(--sp-3)}
+.section{padding:var(--sp-7) 0}
+.grid{display:grid; gap:var(--sp-4)}
+.grid-2{grid-template-columns:1fr; }
+.grid-3{grid-template-columns:1fr; }
+.grid-4{grid-template-columns:1fr; }
+@media (min-width:720px){
+  .grid-2{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1000px){
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+}
+
+/* 6) Tarjetas y superficies */
+.card{
+  background:var(--bg-soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  box-shadow:none;
+}
+.card--elev{box-shadow:var(--shadow)}
+
+/* 7) Botones */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.85rem 1.1rem; border-radius:12px; font-weight:600; line-height:1; cursor:pointer;
+  border:1px solid transparent; transition:.2s ease;
+}
+.btn--primary{background:var(--accent); color:#0b0f12}
+.btn--ghost{border-color:rgba(255,255,255,.14); background:transparent; color:var(--ink)}
+.btn--danger{background:var(--danger); color:#fff}
+.btn:hover{transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.25)}
+.btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+/* 8) Navegación sticky */
+.header{
+  position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px);
+  background:rgba(0,0,0,.35); border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav{display:flex; gap:1rem; align-items:center}
+.nav a{color:var(--ink-2)}
+.nav a:hover{color:var(--ink)}
+
+/* 9) Hero */
+.hero{min-height:78vh; display:flex; align-items:center}
+.hero__art{
+  aspect-ratio:4/3; border-radius:24px;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));
+  border:1px solid rgba(255,255,255,.1);
+}
+
+/* 10) Métricas */
+.kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-3)}
+.kpi{background:var(--bg-soft); border:1px solid var(--line); border-radius:18px; padding:var(--sp-4)}
+.kpi__num{font-weight:800; font-size:1.6rem; color:var(--ink)}
+.kpi__cap{color:var(--ink-2); font-size:.9rem}
+@media (min-width:900px){ .kpis{grid-template-columns:repeat(4,1fr)} }
+
+/* 11) FAQ */
+details.faq{
+  background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:var(--sp-3)
+}
+details.faq summary{cursor:pointer; font-weight:600}
+details.faq[open]{border-color:rgba(255,255,255,.22)}
+
+/* 12) Formularios */
+.input{
+  width:100%; padding:.75rem .9rem; border-radius:12px;
+  background:#0b0f12; border:1px solid rgba(255,255,255,.14); color:var(--ink);
+}
+.input::placeholder{color:#9aa5ac}
+.label{display:block; font-size:.9rem; color:var(--ink-2); margin-bottom:.4rem}
+
+/* 13) Footer */
+.footer{border-top:1px solid rgba(255,255,255,.1); color:var(--ink-2); padding:1.4rem 0}
+
+/* 14) Motion preferencia */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
+}
+
   </style>
 </head>
 <body>
