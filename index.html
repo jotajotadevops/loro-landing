@@ -418,20 +418,26 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 </script>
 
   <script>
-  // 👉 Reemplazá por tu endpoint (Apps Script o n8n)
+<script type="module">
+(() => {
   const ENDPOINT = "https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec";
-
   const form = document.getElementById('contactForm');
   const msg  = document.getElementById('formMsg');
   const btn  = document.getElementById('submitBtn');
+  if (!form) return; // evita errores si no existe el form
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     msg.textContent = "";
-    btn.disabled = true; btn.textContent = "Enviando…";
+    btn.disabled = true; 
+    btn.textContent = "Enviando…";
 
     // honeypot
-    if (form.website && form.website.value) { btn.disabled = false; btn.textContent = "Enviar"; return; }
+    if (form.website && form.website.value) {
+      btn.disabled = false;
+      btn.textContent = "Enviar";
+      return;
+    }
 
     const payload = {
       nombre: form.nombre.value.trim(),
@@ -451,18 +457,21 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error("Bad status " + res.status);
-      msg.style.color = "var(--ink)"; // éxito
+      msg.style.color = "var(--ink)";
       msg.textContent = "¡Gracias! Recibimos tu consulta y te contactamos pronto.";
       form.reset();
     } catch (err) {
       console.error(err);
-      msg.style.color = "#fca5a5";    // error
+      msg.style.color = "#fca5a5";
       msg.textContent = "Hubo un problema al enviar. Probá de nuevo o escribinos por email.";
     } finally {
-      btn.disabled = false; btn.textContent = "Enviar";
+      btn.disabled = false;
+      btn.textContent = "Enviar";
     }
   });
+})();
 </script>
+
 
 
 </body>
