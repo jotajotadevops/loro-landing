@@ -137,165 +137,250 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
 }
 
+    /* Barra superior */
+.header__bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+
+/* Marca */
+.brand{display:flex;align-items:center;gap:.75rem}
+.brand__mark{width:32px;height:32px;border-radius:10px;display:inline-block;
+  background:linear-gradient(135deg,#34d399,#bef264)}
+.brand__name{font-weight:700}
+
+/* Desktop / Mobile toggles */
+.nav--desktop{display:none}
+.hamburger{display:inline-flex;flex-direction:column;gap:5px;padding:.5rem .4rem;
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;background:transparent;cursor:pointer}
+.hamburger span{width:20px;height:2px;background:var(--ink);display:block}
+@media (min-width:960px){
+  .nav--desktop{display:flex}
+  .hamburger{display:none}
+}
+
+/* Menú móvil */
+.nav--mobile{
+  display:none; flex-direction:column; gap:.75rem; padding:0 1.25rem .9rem;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav--mobile[data-open="true"]{display:flex}
+.nav--mobile a{padding:.4rem 0}
+
   </style>
 </head>
+  <script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  function closeMenu(){ menu.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); }
+  btn?.addEventListener('click', () => {
+    const open = menu.dataset.open === 'true';
+    menu.dataset.open = (!open).toString();
+    btn.setAttribute('aria-expanded', (!open).toString());
+  });
+</script>
+  
 <body>
   <!-- NAV -->
-  <header class="sticky">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;">
-      <a href="#top" style="display:flex;align-items:center;gap:12px">
-        <span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#34d399,#bef264);display:inline-block"></span>
-        <strong>Loro</strong>
-      </a>
-      <nav class="nav hide-sm" id="topnav">
-        <a href="#features">Soluciones</a>
-        <a href="#pricing">Precios</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contacto" class="btn btn-accent">Quiero una demo</a>
-      </nav>
-    </div>
-  </header>
+<header class="header" role="banner">
+  <div class="container header__bar">
+    <a href="#top" class="brand" aria-label="Inicio Loro">
+      <span class="brand__mark" aria-hidden="true"></span>
+      <strong class="brand__name">Loro</strong>
+    </a>
 
-  <!-- HERO -->
-  <section id="top" style="min-height:78vh;display:flex;align-items:center">
-    <div class="container grid g12" style="padding:64px 0">
-      <div style="grid-column:span 7">
-        <h1 style="font-size:40px;line-height:1.1;margin:0 0 12px 0">Automatizá ventas y soporte con IA real</h1>
-        <p class="muted" style="font-size:18px;margin:0 0 16px 0">
-          WhatsApp Business + Chatwoot + n8n. Flujos conversacionales listos, con memoria, anti-loop y control de costos por tokens.
-        </p>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 26px 0">
-          <a href="#contacto" class="btn btn-accent">Probar demo</a>
-          <a href="#features" class="btn btn-ghost">Ver soluciones</a>
-        </div>
-        <div class="grid g4" style="gap:12px">
-          <div class="card"><div style="font-size:28px;font-weight:800">+5.000</div><div class="muted" style="font-size:13px">chats/mes</div></div>
-          <div class="card"><div style="font-size:28px;font-weight:800">99,9%</div><div class="muted" style="font-size:13px">uptime</div></div>
-          <div class="card"><div style="font-size:28px;font-weight:800">-40%</div><div class="muted" style="font-size:13px">tiempo de respuesta</div></div>
-          <div class="card"><div style="font-size:28px;font-weight:800">+23%</div><div class="muted" style="font-size:13px">conversiones</div></div>
-        </div>
-      </div>
-      <div style="grid-column:span 5">
-        <div style="aspect-ratio:4/3;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));border:1px solid rgba(255,255,255,.1)"></div>
-      </div>
-    </div>
-  </section>
+    <!-- Nav desktop -->
+    <nav class="nav nav--desktop" aria-label="Navegación principal">
+      <a href="#features">Soluciones</a>
+      <a href="#pricing">Precios</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contacto" class="btn btn--primary">Quiero una demo</a>
+    </nav>
 
-  <!-- FEATURES -->
-  <section id="features" style="padding:64px 0">
-    <div class="container">
-      <h2 style="font-size:30px;margin:0 0 22px 0">Soluciones clave</h2>
-      <div class="grid g4" style="gap:16px">
-        <article class="card">
-          <h3 style="font-size:20px;margin:0 0 6px 0">Pedidos con IA</h3>
-          <p class="muted">Menú, medios de pago y envíos en un solo flujo. Registro en Google Sheets.</p>
-        </article>
-        <article class="card">
-          <h3 style="font-size:20px;margin:0 0 6px 0">Chatwoot + WhatsApp</h3>
-          <p class="muted">Omnicanal, asignaciones y alertas para atención humana.</p>
-        </article>
-        <article class="card">
-          <h3 style="font-size:20px;margin:0 0 6px 0">n8n automations</h3>
-          <p class="muted">Webhooks, memoria, token accounting y notificaciones (Gmail/Telegram/SMS).</p>
-        </article>
-        <article class="card">
-          <h3 style="font-size:20px;margin:0 0 6px 0">Deploy Pages + dominio .com.ar</h3>
-          <p class="muted">GitHub Pages + Cloudflare + AFIP. SSL y performance.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+    <!-- Botón menú móvil -->
+    <button class="hamburger" id="menuBtn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 
-  <!-- PRICING -->
-  <section id="pricing" style="padding:64px 0">
-    <div class="container">
-      <h2 style="font-size:30px;margin:0 0 22px 0">Precios</h2>
-      <div class="grid g3" style="gap:16px">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0">Starter</h3>
-          <p class="muted">Hasta 1.000 chats/mes</p>
-          <div style="font-size:34px;font-weight:800;margin:12px 0 18px 0">$0</div>
-          <ul class="muted" style="line-height:1.7">
-            <li>Landing + 1 flujo n8n</li>
-            <li>WhatsApp (Chatwoot)</li>
-            <li>Soporte por email</li>
-          </ul>
+  <!-- Nav móvil -->
+  <nav id="mobileMenu" class="nav nav--mobile" aria-label="Navegación móvil" data-open="false">
+    <a href="#features" onclick="closeMenu()">Soluciones</a>
+    <a href="#pricing" onclick="closeMenu()">Precios</a>
+    <a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#contacto" class="btn btn--primary" onclick="closeMenu()">Quiero una demo</a>
+  </nav>
+ </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero section" aria-label="Introducción">
+  <div class="container grid grid-2">
+    <div>
+      <h1>Automatizá ventas y soporte con IA real</h1>
+      <p class="muted">
+        WhatsApp Business + Chatwoot + n8n. Flujos conversacionales listos, con memoria, anti-loop y control de costos por tokens.
+      </p>
+      <div class="grid" style="grid-template-columns:repeat(2,auto); gap:var(--sp-3)">
+        <a href="#contacto" class="btn btn--primary">Probar demo</a>
+        <a href="#features" class="btn btn--ghost">Ver soluciones</a>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis" style="margin-top:var(--sp-5)">
+        <div class="kpi">
+          <div class="kpi__num">+5.000</div>
+          <div class="kpi__cap">chats/mes</div>
         </div>
-        <div class="card" style="outline:2px solid var(--accent)">
-          <h3 style="margin:0 0 6px 0">Pro</h3>
-          <p class="muted">Hasta 5.000 chats/mes</p>
-          <div style="font-size:34px;font-weight:800;margin:12px 0 18px 0">$49</div>
-          <ul class="muted" style="line-height:1.7">
-            <li>Integraciones (Sheets, Gmail, Telegram)</li>
-            <li>Memoria + anti-loop</li>
-            <li>Actualizaciones mensuales</li>
-          </ul>
+        <div class="kpi">
+          <div class="kpi__num">99,9%</div>
+          <div class="kpi__cap">uptime</div>
         </div>
-        <div class="card">
-          <h3 style="margin:0 0 6px 0">Empresa</h3>
-          <p class="muted">+5.000 chats/mes</p>
-          <div style="font-size:34px;font-weight:800;margin:12px 0 18px 0">Custom</div>
-          <ul class="muted" style="line-height:1.7">
-            <li>SLA y soporte 24/7</li>
-            <li>Dashboards y auditoría</li>
-            <li>Escalado dedicado</li>
-          </ul>
+        <div class="kpi">
+          <div class="kpi__num">-40%</div>
+          <div class="kpi__cap">tiempo de respuesta</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">+23%</div>
+          <div class="kpi__cap">conversiones</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- FAQ -->
-  <section id="faq" style="padding:64px 0">
-    <div class="container">
-      <h2 style="font-size:30px;margin:0 0 22px 0">FAQ</h2>
-      <div class="grid" style="gap:10px">
-        <details class="card">
-          <summary>¿Se puede hostear gratis?</summary>
-          <div class="muted" style="margin-top:8px">Sí, GitHub Pages para estáticos. Dominio .com.ar con Cloudflare/AFIP.</div>
-        </details>
-        <details class="card">
-          <summary>¿Cómo integramos n8n?</summary>
-          <div class="muted" style="margin-top:8px">Formularios → webhook n8n (POST). Alertas por Telegram/Gmail/SMS.</div>
-        </details>
-        <details class="card">
-          <summary>¿Puedo mantener mi versión anterior?</summary>
-          <div class="muted" style="margin-top:8px">Sí: guardá la versión en /v1 o en otra branch.</div>
-        </details>
-      </div>
+    <div>
+      <div class="hero__art" aria-hidden="true"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACTO -->
-  <section id="contacto" style="padding:64px 0">
-    <div class="container grid g12">
-      <div style="grid-column:span 6">
-        <h2 style="font-size:30px;margin:0 0 8px 0">Contacto</h2>
-        <p class="muted" style="margin:0 0 16px 0">Escribinos y coordinamos una demo. Podés cambiar el formulario a tu webhook de n8n.</p>
-        <ul class="muted" style="line-height:1.8">
-          <li>✉️ <a href="mailto:hola@loro.com.ar">hola@loro.com.ar</a></li>
-          <li>🌐 loro.com.ar</li>
+<!-- FEATURES -->
+<section id="features" class="section" aria-label="Soluciones">
+  <div class="container">
+    <h2>Soluciones clave</h2>
+    <div class="grid grid-4">
+      <article class="card">
+        <h3>Pedidos con IA</h3>
+        <p class="muted">Menú, medios de pago y envíos en un solo flujo. Registro en Google Sheets.</p>
+      </article>
+      <article class="card">
+        <h3>Chatwoot + WhatsApp</h3>
+        <p class="muted">Omnicanal, asignaciones y alertas para atención humana.</p>
+      </article>
+      <article class="card">
+        <h3>n8n automations</h3>
+        <p class="muted">Webhooks, memoria, token accounting y notificaciones (Gmail/Telegram/SMS).</p>
+      </article>
+      <article class="card">
+        <h3>Deploy Pages + dominio .com.ar</h3>
+        <p class="muted">GitHub Pages + Cloudflare + AFIP. SSL y performance.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section" aria-label="Precios">
+  <div class="container">
+    <h2>Precios</h2>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Starter</h3>
+        <p class="muted">Hasta 1.000 chats/mes</p>
+        <div style="font-size:2rem; font-weight:800; margin:var(--sp-3) 0">$0</div>
+        <ul class="muted" style="line-height:1.7">
+          <li>Landing + 1 flujo n8n</li>
+          <li>WhatsApp (Chatwoot)</li>
+          <li>Soporte por email</li>
         </ul>
       </div>
-      <form action="mailto:hola@loro.com.ar" method="post" enctype="text/plain" class="card" style="grid-column:span 6">
-        <div class="grid" style="gap:10px">
-          <label>Nombre<br><input name="nombre" placeholder="Tu nombre" style="width:100%;border-radius:12px;background:#0b0f12;border:1px solid rgba(255,255,255,.12);padding:10px" required></label>
-          <label>Email<br><input type="email" name="email" placeholder="tu@email.com" style="width:100%;border-radius:12px;background:#0b0f12;border:1px solid rgba(255,255,255,.12);padding:10px" required></label>
-          <label>Mensaje<br><textarea name="mensaje" rows="4" placeholder="Contanos sobre tu negocio" style="width:100%;border-radius:12px;background:#0b0f12;border:1px solid rgba(255,255,255,.12);padding:10px"></textarea></label>
-          <button class="btn btn-accent" type="submit">Enviar</button>
-          <p class="muted" style="font-size:12px">Tip: reemplazá <code>action</code> por tu webhook de n8n (POST) para guardar leads.</p>
-        </div>
-      </form>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer style="border-top:1px solid rgba(255,255,255,.1);padding:26px 0;color:rgba(255,255,255,.7)">
-    <div class="container" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
-      <div>© <span id="year"></span> Loro. Todos los derechos reservados.</div>
-      <div style="font-size:13px">Hecho con ❤️ en Buenos Aires</div>
+      <div class="card card--elev" style="outline:2px solid var(--accent)">
+        <h3>Pro</h3>
+        <p class="muted">Hasta 5.000 chats/mes</p>
+        <div style="font-size:2rem; font-weight:800; margin:var(--sp-3) 0">$49</div>
+        <ul class="muted" style="line-height:1.7">
+          <li>Integraciones (Sheets, Gmail, Telegram)</li>
+          <li>Memoria + anti-loop</li>
+          <li>Actualizaciones mensuales</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Empresa</h3>
+        <p class="muted">+5.000 chats/mes</p>
+        <div style="font-size:2rem; font-weight:800; margin:var(--sp-3) 0">Custom</div>
+        <ul class="muted" style="line-height:1.7">
+          <li>SLA y soporte 24/7</li>
+          <li>Dashboards y auditoría</li>
+          <li>Escalado dedicado</li>
+        </ul>
+      </div>
     </div>
-  </footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="section" aria-label="Preguntas frecuentes">
+  <div class="container">
+    <h2>FAQ</h2>
+    <div class="grid">
+      <details class="faq">
+        <summary>¿Se puede hostear gratis?</summary>
+        <p class="muted">Sí, GitHub Pages para estáticos. Dominio .com.ar con Cloudflare/AFIP.</p>
+      </details>
+      <details class="faq">
+        <summary>¿Cómo integramos n8n?</summary>
+        <p class="muted">Formularios → webhook n8n (POST). Alertas por Telegram/Gmail/SMS.</p>
+      </details>
+      <details class="faq">
+        <summary>¿Puedo mantener mi versión anterior?</summary>
+        <p class="muted">Sí: guardá la versión en /v1 o en otra branch.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section" aria-label="Contacto">
+  <div class="container grid grid-2">
+    <div>
+      <h2>Contacto</h2>
+      <p class="muted">Escribinos y coordinamos una demo. Podés cambiar el formulario a tu webhook de n8n.</p>
+      <ul class="muted" style="line-height:1.8">
+        <li>✉️ <a href="mailto:hola@loro.com.ar">hola@loro.com.ar</a></li>
+        <li>🌐 loro.com.ar</li>
+      </ul>
+    </div>
+
+    <form action="mailto:hola@loro.com.ar" method="post" enctype="text/plain" class="card" aria-label="Formulario de contacto">
+      <label class="label" for="f-nombre">Nombre</label>
+      <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" required>
+
+      <label class="label" for="f-email">Email</label>
+      <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com" required>
+
+      <label class="label" for="f-msg">Mensaje</label>
+      <textarea id="f-msg" name="mensaje" rows="4" class="input" placeholder="Contanos sobre tu negocio"></textarea>
+
+      <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
+        <button class="btn btn--primary" type="submit">Enviar</button>
+        <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
+      </div>
+      <small class="muted">Tip: reemplazá <code>action</code> por tu webhook de n8n (POST) para guardar leads.</small>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3)">
+    <div>© <span id="year"></span> Loro. Todos los derechos reservados.</div>
+    <div style="font-size:.85rem">Hecho con ❤️ en Buenos Aires</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  // helper para cerrar menú móvil (si pegaste el header mejorado)
+  function closeMenu(){ const m=document.getElementById('mobileMenu'); const b=document.getElementById('menuBtn'); if(m&&b){m.dataset.open='false'; b.setAttribute('aria-expanded','false');}}
+</script>
+
 </body>
 </html>
