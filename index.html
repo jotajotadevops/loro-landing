@@ -166,16 +166,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 
   </style>
 </head>
-  <script>
-  const btn = document.getElementById('menuBtn');
-  const menu = document.getElementById('mobileMenu');
-  function closeMenu(){ menu.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); }
-  btn?.addEventListener('click', () => {
-    const open = menu.dataset.open === 'true';
-    menu.dataset.open = (!open).toString();
-    btn.setAttribute('aria-expanded', (!open).toString());
-  });
-</script>
+
   
 <body>
   <!-- NAV -->
@@ -207,7 +198,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     <a href="#faq" onclick="closeMenu()">FAQ</a>
     <a href="#contacto" class="btn btn--primary" onclick="closeMenu()">Quiero una demo</a>
   </nav>
- </div>
+
 </header>
 
 <!-- HERO -->
@@ -220,7 +211,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       </p>
       <div class="grid" style="grid-template-columns:repeat(2,auto); gap:var(--sp-3)">
         <a href="#contacto" class="btn btn--primary">Contactanos</a>
-        <a href="#features" class="btn btn--ghost">Ver soluciones</a>>
+        <a href="#features" class="btn btn--ghost">Ver soluciones</a>
       </div>
 
       <!-- KPIs -->
@@ -353,53 +344,56 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       </ul>
     </div>
 
-<form id="contactForm"
-      class="card"
-      aria-label="Formulario de contacto"
-      action="https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec"
-      method="post"
-      novalidate>
-  <label class="label" for="f-nombre">Nombre</label>
-  <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
+    <!-- Fallback nativo: apunta a Apps Script (por si el JS no carga) -->
+    <form id="contactForm"
+          class="card"
+          aria-label="Formulario de contacto"
+          action="https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec"
+          method="post"
+          target="hidden_iframe"
+          novalidate>
+      <label class="label" for="f-nombre">Nombre</label>
+      <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
 
-  <label class="label" for="f-email">Mail</label>
-  <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com"
-         autocomplete="email" required>
+      <label class="label" for="f-email">Mail</label>
+      <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com"
+             autocomplete="email" required>
 
-  <label class="label" for="f-telefono">Teléfono</label>
-  <input id="f-telefono" type="tel" name="telefono" class="input" inputmode="tel"
-         placeholder="+54 9 11 1234-5678" autocomplete="tel">
+      <label class="label" for="f-telefono">Teléfono</label>
+      <input id="f-telefono" type="tel" name="telefono" class="input" inputmode="tel"
+             placeholder="+54 9 11 1234-5678" autocomplete="tel">
 
-  <label class="label" for="f-industria">Industria</label>
-  <select id="f-industria" name="industria" class="input">
-    <option value="">Seleccioná…</option>
-    <option>Gastronomía</option><option>Retail</option><option>Servicios</option>
-    <option>E-commerce</option><option>Educación</option><option>Otra</option>
-  </select>
+      <label class="label" for="f-industria">Industria</label>
+      <select id="f-industria" name="industria" class="input">
+        <option value="">Seleccioná…</option>
+        <option>Gastronomía</option><option>Retail</option><option>Servicios</option>
+        <option>E-commerce</option><option>Educación</option><option>Otra</option>
+      </select>
 
-  <label class="label" for="f-mensajes">Mensajes recibidos mensualmente</label>
-  <select id="f-mensajes" name="mensajes_mensuales" class="input">
-    <option value="">Seleccioná…</option>
-    <option>0–500</option><option>500–1.000</option><option>1.000–5.000</option>
-    <option>5.000–10.000</option><option>+10.000</option>
-  </select>
+      <label class="label" for="f-mensajes">Mensajes recibidos mensualmente</label>
+      <select id="f-mensajes" name="mensajes_mensuales" class="input">
+        <option value="">Seleccioná…</option>
+        <option>0–500</option><option>500–1.000</option><option>1.000–5.000</option>
+        <option>5.000–10.000</option><option>+10.000</option>
+      </select>
 
-  <label class="label" for="f-comentario">Comentario</label>
-  <textarea id="f-comentario" name="comentario" rows="4" class="input"
-            placeholder="Contanos sobre tu negocio"></textarea>
+      <label class="label" for="f-comentario">Comentario</label>
+      <textarea id="f-comentario" name="comentario" rows="4" class="input"
+                placeholder="Contanos sobre tu negocio"></textarea>
 
-  <!-- honeypot anti-spam -->
-  <input type="text" name="website" style="position:absolute;left:-9999px"
-         tabindex="-1" autocomplete="off">
+      <!-- honeypot anti-spam -->
+      <input type="text" name="website" style="position:absolute;left:-9999px"
+             tabindex="-1" autocomplete="off">
 
-  <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
-    <button class="btn btn--primary" type="submit" id="submitBtn">Enviar</button>
-    <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
+      <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
+        <button class="btn btn--primary" type="submit" id="submitBtn">Enviar</button>
+        <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
+      </div>
+
+      <div id="formMsg" class="muted" style="margin-top:var(--sp-3)"></div>
+    </form>
+    <iframe name="hidden_iframe" style="display:none"></iframe>
   </div>
-
-  <div id="formMsg" class="muted" style="margin-top:var(--sp-3)"></div>
-</form>
-  </div> <!-- 👈 Cierre del .container -->
 </section>
 
 <!-- FOOTER -->
@@ -416,30 +410,33 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   function closeMenu(){ const m=document.getElementById('mobileMenu'); const b=document.getElementById('menuBtn'); if(m&&b){m.dataset.open='false'; b.setAttribute('aria-expanded','false');}}
 </script>
 
- <script type="module">
+<script type="module">
 (() => {
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec";
+  // Menú móvil (ahora sí, al final del body)
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  window.closeMenu = function(){ if(menu && btn){ menu.dataset.open='false'; btn.setAttribute('aria-expanded','false'); } };
+  btn?.addEventListener('click', () => {
+    const open = menu?.dataset.open === 'true';
+    if(menu && btn){ menu.dataset.open = (!open).toString(); btn.setAttribute('aria-expanded', (!open).toString()); }
+  });
 
-  if (window.__loroContactInit) return;
-  window.__loroContactInit = true;
+  // Form
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec";
+  if (window.__loroContactInit) return; window.__loroContactInit = true;
 
   const form = document.getElementById('contactForm');
   const msg  = document.getElementById('formMsg');
-  const btn  = document.getElementById('submitBtn');
-  if (!form || !btn) return;
+  const btnSend  = document.getElementById('submitBtn');
+  if (!form || !btnSend) return;
 
   form.addEventListener('submit', async (e) => {
-    // Evita submit nativo a la página (que causaba el 405)
-    e.preventDefault();
-
+    e.preventDefault();               // evita 405 en tu dominio
     msg.textContent = "";
-    btn.disabled = true;
-    btn.textContent = "Enviando…";
+    btnSend.disabled = true; btnSend.textContent = "Enviando…";
 
     // Honeypot
-    if (form.website && form.website.value) {
-      btn.disabled = false; btn.textContent = "Enviar"; return;
-    }
+    if (form.website && form.website.value) { btnSend.disabled = false; btnSend.textContent = "Enviar"; return; }
 
     const payload = {
       nombre: form.nombre.value.trim(),
@@ -448,7 +445,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       industria: form.industria.value,
       mensajes_mensuales: form.mensajes_mensuales.value,
       comentario: form.comentario.value.trim(),
-      origen: "loro.com.ar",
+      origen: location.host,
       ts: new Date().toISOString()
     };
 
@@ -467,12 +464,24 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       console.error(err);
       msg.style.color = "#fca5a5";
       msg.textContent = "Hubo un problema al enviar. Probá de nuevo o escribinos por email.";
+      // Fallback extremo: si fetch falla por CSP, deja que el submit nativo pegue al action (Apps Script)
+      setTimeout(() => form.submit(), 3000);
     } finally {
-      btn.disabled = false;
-      btn.textContent = "Enviar";
+      btnSend.disabled = false; btnSend.textContent = "Enviar";
     }
   });
 })();
+</script>
+
+    <script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('mobileMenu');
+  function closeMenu(){ menu.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); }
+  btn?.addEventListener('click', () => {
+    const open = menu.dataset.open === 'true';
+    menu.dataset.open = (!open).toString();
+    btn.setAttribute('aria-expanded', (!open).toString());
+  });
 </script>
 
 
