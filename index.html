@@ -353,8 +353,12 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       </ul>
     </div>
 
-<form id="contactForm" class="card" aria-label="Formulario de contacto"
-      action="#" method="post" novalidate>
+<form id="contactForm"
+      class="card"
+      aria-label="Formulario de contacto"
+      action="https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec"
+      method="post"
+      novalidate>
   <label class="label" for="f-nombre">Nombre</label>
   <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
 
@@ -412,26 +416,29 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   function closeMenu(){ const m=document.getElementById('mobileMenu'); const b=document.getElementById('menuBtn'); if(m&&b){m.dataset.open='false'; b.setAttribute('aria-expanded','false');}}
 </script>
 
-  <script>
-<script type="module">
+ <script type="module">
 (() => {
   const ENDPOINT = "https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec";
+
+  if (window.__loroContactInit) return;
+  window.__loroContactInit = true;
+
   const form = document.getElementById('contactForm');
   const msg  = document.getElementById('formMsg');
   const btn  = document.getElementById('submitBtn');
-  if (!form) return; // evita errores si no existe el form
+  if (!form || !btn) return;
 
   form.addEventListener('submit', async (e) => {
+    // Evita submit nativo a la página (que causaba el 405)
     e.preventDefault();
+
     msg.textContent = "";
-    btn.disabled = true; 
+    btn.disabled = true;
     btn.textContent = "Enviando…";
 
-    // honeypot
+    // Honeypot
     if (form.website && form.website.value) {
-      btn.disabled = false;
-      btn.textContent = "Enviar";
-      return;
+      btn.disabled = false; btn.textContent = "Enviar"; return;
     }
 
     const payload = {
@@ -452,6 +459,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
         body: JSON.stringify(payload)
       });
       if (!res.ok) throw new Error("Bad status " + res.status);
+
       msg.style.color = "var(--ink)";
       msg.textContent = "¡Gracias! Recibimos tu consulta y te contactamos pronto.";
       form.reset();
@@ -466,6 +474,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   });
 })();
 </script>
+
 
 
 
