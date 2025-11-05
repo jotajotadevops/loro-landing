@@ -353,53 +353,48 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       </ul>
     </div>
 
-    <form id="contactForm" class="card" aria-label="Formulario de contacto" novalidate>
-      <label class="label" for="f-nombre">Nombre</label>
-      <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
+<form id="contactForm" class="card" aria-label="Formulario de contacto"
+      action="#" method="post" novalidate>
+  <label class="label" for="f-nombre">Nombre</label>
+  <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
 
-      <label class="label" for="f-email">Mail</label>
-      <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com"
-             autocomplete="email" required>
+  <label class="label" for="f-email">Mail</label>
+  <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com"
+         autocomplete="email" required>
 
-      <label class="label" for="f-telefono">Teléfono</label>
-      <input id="f-telefono" type="tel" name="telefono" class="input" inputmode="tel"
-             placeholder="+54 9 11 1234-5678" autocomplete="tel">
+  <label class="label" for="f-telefono">Teléfono</label>
+  <input id="f-telefono" type="tel" name="telefono" class="input" inputmode="tel"
+         placeholder="+54 9 11 1234-5678" autocomplete="tel">
 
-      <label class="label" for="f-industria">Industria</label>
-      <select id="f-industria" name="industria" class="input">
-        <option value="">Seleccioná…</option>
-        <option>Gastronomía</option>
-        <option>Retail</option>
-        <option>Servicios</option>
-        <option>E-commerce</option>
-        <option>Educación</option>
-        <option>Otra</option>
-      </select>
+  <label class="label" for="f-industria">Industria</label>
+  <select id="f-industria" name="industria" class="input">
+    <option value="">Seleccioná…</option>
+    <option>Gastronomía</option><option>Retail</option><option>Servicios</option>
+    <option>E-commerce</option><option>Educación</option><option>Otra</option>
+  </select>
 
-      <label class="label" for="f-mensajes">Mensajes recibidos mensualmente</label>
-      <select id="f-mensajes" name="mensajes_mensuales" class="input">
-        <option value="">Seleccioná…</option>
-        <option>0–500</option>
-        <option>500–1.000</option>
-        <option>1.000–5.000</option>
-        <option>5.000–10.000</option>
-        <option>+10.000</option>
-      </select>
+  <label class="label" for="f-mensajes">Mensajes recibidos mensualmente</label>
+  <select id="f-mensajes" name="mensajes_mensuales" class="input">
+    <option value="">Seleccioná…</option>
+    <option>0–500</option><option>500–1.000</option><option>1.000–5.000</option>
+    <option>5.000–10.000</option><option>+10.000</option>
+  </select>
 
-      <label class="label" for="f-comentario">Comentario</label>
-      <textarea id="f-comentario" name="comentario" rows="4" class="input"
-                placeholder="Contanos sobre tu negocio" autocomplete="off"></textarea>
+  <label class="label" for="f-comentario">Comentario</label>
+  <textarea id="f-comentario" name="comentario" rows="4" class="input"
+            placeholder="Contanos sobre tu negocio"></textarea>
 
-      <!-- honeypot anti-spam -->
-      <input type="text" name="website" style="position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+  <!-- honeypot anti-spam -->
+  <input type="text" name="website" style="position:absolute;left:-9999px"
+         tabindex="-1" autocomplete="off">
 
-      <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
-        <button class="btn btn--primary" type="submit" id="submitBtn">Enviar</button>
-        <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
-      </div>
+  <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
+    <button class="btn btn--primary" type="submit" id="submitBtn">Enviar</button>
+    <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
+  </div>
 
-      <div id="formMsg" class="muted" style="margin-top:var(--sp-3)"></div>
-    </form>
+  <div id="formMsg" class="muted" style="margin-top:var(--sp-3)"></div>
+</form>
   </div> <!-- 👈 Cierre del .container -->
 </section>
 
