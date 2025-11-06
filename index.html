@@ -410,82 +410,100 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   function closeMenu(){ const m=document.getElementById('mobileMenu'); const b=document.getElementById('menuBtn'); if(m&&b){m.dataset.open='false'; b.setAttribute('aria-expanded','false');}}
 </script>
 
+<!-- =============================
+     DB: Supabase + fallback Apps Script
+     ============================= -->
 <script type="module">
-(() => {
-  // Menú móvil (ahora sí, al final del body)
-  const btn = document.getElementById('menuBtn');
-  const menu = document.getElementById('mobileMenu');
-  window.closeMenu = function(){ if(menu && btn){ menu.dataset.open='false'; btn.setAttribute('aria-expanded','false'); } };
-  btn?.addEventListener('click', () => {
-    const open = menu?.dataset.open === 'true';
-    if(menu && btn){ menu.dataset.open = (!open).toString(); btn.setAttribute('aria-expanded', (!open).toString()); }
-  });
+  // 1) CARGA LIBRERÍA
+  import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-  // Form
-  const ENDPOINT = "https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec";
+  // 2) CONFIG - Estos valores son PÚBLICOS (usar la anon key)
+  //    Guardalos en un archivo /config.json en el root del repo si no querés hardcodear aquí.
+  //    Ejemplo de /config.json: { "SUPABASE_URL":"https://xxxxx.supabase.co", "SUPABASE_ANON":"eyJhbGciOiJI..." }
+  const CFG_URL  = '/config.json';
+
+  async function loadConfig(){
+    try{ const r = await fetch(CFG_URL, {cache:'no-store'}); if(!r.ok) throw new Error(); return await r.json(); }
+    catch{ return { SUPABASE_URL: window.SUPABASE_URL, SUPABASE_ANON: window.SUPABASE_ANON }; }
+  }
+
   if (window.__loroContactInit) return; window.__loroContactInit = true;
 
-  const form = document.getElementById('contactForm');
-  const msg  = document.getElementById('formMsg');
-  const btnSend  = document.getElementById('submitBtn');
-  if (!form || !btnSend) return;
+  const form   = document.getElementById('contactForm');
+  const msg    = document.getElementById('formMsg');
+  const btn    = document.getElementById('submitBtn');
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec';
+
+  if(!form || !btn) return;
+
+  const cfg = await loadConfig();
+  const supabase = (cfg.SUPABASE_URL && cfg.SUPABASE_ANON)
+    ? createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON)
+    : null;
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();               // evita 405 en tu dominio
-    msg.textContent = "";
-    btnSend.disabled = true; btnSend.textContent = "Enviando…";
+    e.preventDefault();
+    msg.textContent = '';
+    btn.disabled = true; btn.textContent = 'Enviando…';
 
     // Honeypot
-    if (form.website && form.website.value) { btnSend.disabled = false; btnSend.textContent = "Enviar"; return; }
+    if (form.website && form.website.value) { btn.disabled = false; btn.textContent = 'Enviar'; return; }
 
     const payload = {
       nombre: form.nombre.value.trim(),
       email: form.email.value.trim(),
       telefono: form.telefono.value.trim(),
-      industria: form.industria.value,
-      mensajes_mensuales: form.mensajes_mensuales.value,
+      industria: form.industria.value || null,
+      mensajes_mensuales: form.mensajes_mensuales.value || null,
       comentario: form.comentario.value.trim(),
       origen: location.host,
       ts: new Date().toISOString()
     };
 
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      // 3) Guarda en BD (tabla "leads") si hay supabase configurado
+      if (supabase) {
+        const { error } = await supabase.from('leads').insert(payload);
+        if (error) throw error;
+      }
+
+      // 4) Envía también a Apps Script como backup/forward a Sheets/email
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (!res.ok) throw new Error("Bad status " + res.status);
 
-      msg.style.color = "var(--ink)";
-      msg.textContent = "¡Gracias! Recibimos tu consulta y te contactamos pronto.";
+      msg.style.color = 'var(--ink)';
+      msg.textContent = '¡Gracias! Recibimos tu consulta y te contactamos pronto.';
       form.reset();
     } catch (err) {
       console.error(err);
-      msg.style.color = "#fca5a5";
-      msg.textContent = "Hubo un problema al enviar. Probá de nuevo o escribinos por email.";
-      // Fallback extremo: si fetch falla por CSP, deja que el submit nativo pegue al action (Apps Script)
-      setTimeout(() => form.submit(), 3000);
+      msg.style.color = '#fca5a5';
+      msg.textContent = 'Hubo un problema al enviar. Probá de nuevo o escribinos por email.';
+      // Fallback extremo: submit nativo al action (Apps Script)
+      setTimeout(() => form.submit(), 2500);
     } finally {
-      btnSend.disabled = false; btnSend.textContent = "Enviar";
+      btn.disabled = false; btn.textContent = 'Enviar';
     }
   });
-})();
 </script>
 
-    <script>
+<!-- Opcional: exponer variables si preferís no usar /config.json -->
+<script>
+  // window.SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
+  // window.SUPABASE_ANON = 'TU_ANON_PUBLIC_KEY';
+</script>
+
+<!-- ======= MENÚ MÓVIL (una sola vez, sin duplicados) ======= -->
+<script>
   const btn = document.getElementById('menuBtn');
   const menu = document.getElementById('mobileMenu');
-  function closeMenu(){ menu.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); }
+  function closeMenu(){ if(menu && btn){ menu.dataset.open = 'false'; btn.setAttribute('aria-expanded','false'); } }
   btn?.addEventListener('click', () => {
-    const open = menu.dataset.open === 'true';
-    menu.dataset.open = (!open).toString();
-    btn.setAttribute('aria-expanded', (!open).toString());
+    const open = menu?.dataset.open === 'true';
+    if(menu && btn){ menu.dataset.open = (!open).toString(); btn.setAttribute('aria-expanded', (!open).toString()); }
   });
+  window.closeMenu = closeMenu;
 </script>
 
-
-
-
-</body>
-</html>
