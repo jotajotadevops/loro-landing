@@ -406,7 +406,6 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-  // helper para cerrar menú móvil (si pegaste el header mejorado)
   function closeMenu(){ const m=document.getElementById('mobileMenu'); const b=document.getElementById('menuBtn'); if(m&&b){m.dataset.open='false'; b.setAttribute('aria-expanded','false');}}
 </script>
 
@@ -414,32 +413,30 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
      DB: Supabase + fallback Apps Script
      ============================= -->
 <script type="module">
-  // 1) CARGA LIBRERÍA
   import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-  // 2) CONFIG - Estos valores son PÚBLICOS (usar la anon key)
-  //    Guardalos en un archivo /config.json en el root del repo si no querés hardcodear aquí.
-  //    Ejemplo de /config.json: { "SUPABASE_URL":"https://xxxxx.supabase.co", "SUPABASE_ANON":"eyJhbGciOiJI..." }
-  const CFG_URL  = '/config.json';
+  // 🔐 TUS CREDENCIALES (anon pública + URL del proyecto)
+  const SUPABASE_URL = 'https://nxhpesrmhkyzdqcpxtq.supabase.co';
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54aHBlc3JtaGt5emRxY3B4dHEiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczMDg4NzQ0OCwiZXhwIjoyMDQ2NDYzNDQ4fQ.UZebcpY1oCzPG03_3qEvGFJtvS--0ZYHkcm8HrmhMko';
 
-  async function loadConfig(){
-    try{ const r = await fetch(CFG_URL, {cache:'no-store'}); if(!r.ok) throw new Error(); return await r.json(); }
-    catch{ return { SUPABASE_URL: window.SUPABASE_URL, SUPABASE_ANON: window.SUPABASE_ANON }; }
-  }
-
-  if (window.__loroContactInit) return; window.__loroContactInit = true;
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
 
   const form   = document.getElementById('contactForm');
   const msg    = document.getElementById('formMsg');
   const btn    = document.getElementById('submitBtn');
+
+  // Fallback Apps Script (sigue activo)
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbyxBYNFg1K4B6iL3auIU3Sx37ALVDcUy0oOMi9o7uNDchbtU6dKSmH-zys5dxvuB3gd/exec';
 
-  if(!form || !btn) return;
+  if (!form || !btn) console.warn('Form no encontrado.');
 
-  const cfg = await loadConfig();
-  const supabase = (cfg.SUPABASE_URL && cfg.SUPABASE_ANON)
-    ? createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON)
-    : null;
+  // Test de conexión (opcional)
+  try {
+    await supabase.from('leads').select('id').limit(1);
+    console.log('✅ Conectado a Supabase');
+  } catch (e) {
+    console.warn('⚠️ No se pudo verificar Supabase en el cliente:', e);
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -461,13 +458,11 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     };
 
     try {
-      // 3) Guarda en BD (tabla "leads") si hay supabase configurado
-      if (supabase) {
-        const { error } = await supabase.from('leads').insert(payload);
-        if (error) throw error;
-      }
+      // 1) Guarda en BD (tabla "leads")
+      const { error } = await supabase.from('leads').insert(payload);
+      if (error) throw error;
 
-      // 4) Envía también a Apps Script como backup/forward a Sheets/email
+      // 2) Enviar a Apps Script como backup (Sheets/Email)
       await fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -489,12 +484,6 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   });
 </script>
 
-<!-- Opcional: exponer variables si preferís no usar /config.json -->
-<script>
-  // window.SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-  // window.SUPABASE_ANON = 'TU_ANON_PUBLIC_KEY';
-</script>
-
 <!-- ======= MENÚ MÓVIL (una sola vez, sin duplicados) ======= -->
 <script>
   const btn = document.getElementById('menuBtn');
@@ -506,4 +495,5 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   });
   window.closeMenu = closeMenu;
 </script>
+
 
