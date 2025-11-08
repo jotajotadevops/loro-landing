@@ -215,6 +215,112 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 }
 </style>
 
+  <style>
+  /* ===== FAQ · Borde tech con flujo violeta ===== */
+  :root{
+    --faq-bg:#0f151a;         /* ajusta a tu fondo */
+    --ink:#e7ecf0;            /* texto */
+    --violet:#9b5cff;         /* violeta principal */
+    --violet-2:#6a3eff;       /* acento */
+  }
+
+  .faq-list{ display:grid; gap:14px; }
+
+  /* Soporta <details> o cualquier bloque con .faq-item */
+  details.faq-item, .faq-item{
+    position:relative;
+    border-radius:16px;
+    padding:18px 20px;
+    background:var(--faq-bg);
+    color:var(--ink);
+    outline:none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  /* Borde “tech”: capa base */
+  details.faq-item::before, .faq-item::before{
+    content:"";
+    position:absolute;
+    inset:-1px;                      /* pinta por fuera del borde */
+    border-radius:inherit;
+    padding:1px;                      /* grosor del borde */
+    background:
+      radial-gradient(120px 40px at var(--mx,0%) var(--my,0%), color-mix(in oklab, var(--violet) 60%, transparent), transparent 60%) border-box,
+      conic-gradient(from var(--angle,0deg),
+        transparent 0 20%,
+        color-mix(in oklab, var(--violet), white 12%) 20% 25%,
+        transparent 25% 45%,
+        color-mix(in oklab, var(--violet-2), white 10%) 45% 50%,
+        transparent 50% 70%,
+        color-mix(in oklab, var(--violet), white 12%) 70% 75%,
+        transparent 75% 100%) border-box;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box, 
+      linear-gradient(#000 0 0);           /* recorta al borde */
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--violet) 35%, transparent));
+    transition: filter .2s ease;
+    animation: faq-flow 6s linear infinite paused;
+  }
+
+  /* Glow extra */
+  details.faq-item::after, .faq-item::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    transition: box-shadow .2s ease;
+  }
+
+  /* Interacciones */
+  details.faq-item:hover, .faq-item:hover,
+  details.faq-item:focus-within, .faq-item:focus-within{
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgb(0 0 0 / .35);
+  }
+  details.faq-item:hover::before, .faq-item:hover::before,
+  details.faq-item:focus-within::before, .faq-item:focus-within::before{
+    animation-play-state: running;          /* activa el flujo */
+    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--violet) 55%, transparent));
+  }
+  details.faq-item:hover::after, .faq-item:hover::after,
+  details.faq-item:focus-within::after, .faq-item:focus-within::after{
+    box-shadow: 0 0 22px 3px color-mix(in oklab, var(--violet) 35%, transparent) inset;
+  }
+
+  /* Cursor y accesibilidad para <summary> */
+  details.faq-item > summary{
+    list-style:none; cursor:pointer; font-weight:600;
+  }
+  details.faq-item > summary::-webkit-details-marker{ display:none; }
+
+  /* Animación del flujo (gira el conic-gradient) */
+  @keyframes faq-flow{
+    to { --angle: 360deg; }
+  }
+
+  /* Seguir el mouse para “orbe” violeta en el borde */
+  .faq-list .faq-item{ --mx:50%; --my:0%; }
+  @media (prefers-reduced-motion: reduce){
+    details.faq-item::before, .faq-item::before{ animation: none !important; }
+  }
+</style>
+<script>
+  /* Opcional: mueve el brillo según el mouse */
+  document.addEventListener('pointermove', (e)=>{
+    document.querySelectorAll('.faq-item').forEach(el=>{
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty('--mx', x + '%');
+      el.style.setProperty('--my', y + '%');
+    });
+  });
+</script>
+
+
 </head>
 
   
@@ -496,34 +602,41 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 <section id="faq" class="section" aria-label="Preguntas frecuentes">
   <div class="container">
     <h2>FAQ</h2>
-    <div class="grid">
-      <details class="faq">
-        <summary>¿Que incluye la suscripción?</summary>
-        <p class="muted">La suscripción incluye todo lo necesario para operar. Nos tomamos una semana para dejarte listo todo funcional y despues que la IA haga su magia.</p>
+
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>¿Qué incluye la suscripción?</summary>
+        <p>La suscripción incluye todo lo necesario para operar. Nos tomamos una semana para dejarte todo funcional y después la IA hace su magia.</p>
       </details>
-      <details class="faq">
+
+      <details class="faq-item">
         <summary>¿Cómo nos integramos?</summary>
-        <p class="muted">Necesitamos un numero de Whatsapp para poder integrarlo con la IA, ademas de los datos de tu negocio para que el agente responda todas las consultas relacionadas al negocio. (Horarios, precios, etc...).</p>
+        <p>Necesitamos un número de WhatsApp para integrarlo con la IA, además de los datos de tu negocio para que el agente responda todas las consultas (horarios, precios, etc.).</p>
       </details>
-      <details class="faq">
+
+      <details class="faq-item">
         <summary>¿Se adapta a tu negocio?</summary>
-        <p class="faq">Sí, claro. Por eso nos tomamos una semana para integrarlo y dejarlo operativo 100% personalizado para tu negocio.</p>
+        <p>Sí, claro. Por eso nos tomamos una semana para integrarlo y dejarlo operativo 100% personalizado.</p>
       </details>
-      <details class="faq">
-        <summary>¿Como es la estructura de precios?</summary>
-        <p class="faq">Hay un pago "One-Shot" para implementar el agente a tu negocio y luego un pago mensual recurrente de acuerdo al plan elegido.</p>
+
+      <details class="faq-item">
+        <summary>¿Cómo es la estructura de precios?</summary>
+        <p>Hay un pago único (“One-Shot”) para implementar el agente y luego un pago mensual recurrente según el plan elegido.</p>
       </details>
-      <details class="faq">
-        <summary>¿Como hacemos para avanzar?</summary>
-        <p class="faq">Agendanos una reunion o contactanos y te comentamos los pasos a seguir.</p>
+
+      <details class="faq-item">
+        <summary>¿Cómo hacemos para avanzar?</summary>
+        <p>Agendá una reunión o contactanos y te explicamos los pasos a seguir.</p>
       </details>
-       <details class="faq">
+
+      <details class="faq-item">
         <summary>¿Es como un BOT?</summary>
-        <p class="faq">Si, pero con un agente de IA integrado por lo que puede interpretar todos los mensajes que reciba, sin estructuras y priorizando la atención al cliente.</p>
+        <p>En parte sí, pero con un agente de IA que interpreta mensajes naturales, sin estructuras, priorizando la atención al cliente.</p>
       </details>
     </div>
   </div>
 </section>
+
 
 <!-- CONTACTO -->
 <section id="contacto" class="section" aria-label="Contacto">
