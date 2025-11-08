@@ -266,117 +266,177 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   </div>
 </section>
 
-<section id="precios" class="pricing">
-  <h2>Precios</h2>
+<!-- ========== PRICING ========== -->
+<section class="pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <h2 id="pricing-title">Precios</h2>
 
-  <div class="pricing-grid">
-    <div class="price-card">
-      <h3>Starter</h3>
-      <p class="subtitle">Hasta 1.000 chats/mes</p>
-      <p class="price">$50</p>
-      <ul>
-        <li>Integraciones</li>
-        <li>Respuesta de consultas sobre tu negocio</li>
-        <li>Registro de ventas</li>
-      </ul>
-    </div>
+    <div class="pricing-grid">
+      <!-- Card 1 -->
+      <article class="price-card" tabindex="0">
+        <header class="price-card__head">
+          <h3 class="price-card__title">Starter</h3>
+          <p class="price-card__subtitle">Hasta 1.000 chats/mes</p>
+        </header>
 
-    <div class="price-card">
-      <h3>Pro</h3>
-      <p class="subtitle">Hasta 5.000 chats/mes</p>
-      <p class="price">$109</p>
-      <ul>
-        <li>Integraciones</li>
-        <li>Respuesta de consultas sobre tu negocio</li>
-        <li>Registro de ventas</li>
-      </ul>
-    </div>
+        <div class="price-card__price">
+          <span class="currency">$</span><span class="amount">50</span>
+        </div>
 
-    <div class="price-card">
-      <h3>Empresa</h3>
-      <p class="subtitle">+5.000 chats/mes</p>
-      <p class="price">Custom</p>
-      <ul>
-        <li>Integraciones</li>
-        <li>Respuesta de consultas sobre tu negocio</li>
-        <li>Registro de ventas</li>
-      </ul>
+        <ul class="price-card__features">
+          <li>Integraciones</li>
+          <li>Respuesta de consultas sobre tu negocio</li>
+          <li>Registro de ventas</li>
+        </ul>
+
+        <a href="#" class="price-card__cta">Elegir</a>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="price-card" tabindex="0">
+        <header class="price-card__head">
+          <h3 class="price-card__title">Pro</h3>
+          <p class="price-card__subtitle">Hasta 5.000 chats/mes</p>
+        </header>
+
+        <div class="price-card__price">
+          <span class="currency">$</span><span class="amount">109</span>
+        </div>
+
+        <ul class="price-card__features">
+          <li>Integraciones</li>
+          <li>Respuesta de consultas sobre tu negocio</li>
+          <li>Registro de ventas</li>
+        </ul>
+
+        <a href="#" class="price-card__cta">Elegir</a>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="price-card" tabindex="0">
+        <header class="price-card__head">
+          <h3 class="price-card__title">Empresa</h3>
+          <p class="price-card__subtitle">+5.000 chats/mes</p>
+        </header>
+
+        <div class="price-card__price">
+          <span class="amount">Custom</span>
+        </div>
+
+        <ul class="price-card__features">
+          <li>Integraciones</li>
+          <li>Respuesta de consultas sobre tu negocio</li>
+          <li>Registro de ventas</li>
+        </ul>
+
+        <a href="#" class="price-card__cta">Contactar</a>
+      </article>
     </div>
   </div>
 </section>
 
 <style>
-:root {
-  --bg: #0b0f12;
-  --card: #0f151a;
-  --ink: #f1f5f9;
-  --muted: #a9b7c0;
-  --green: #22c55e;
-}
+  :root{
+    --bg:#0b0f12;
+    --card:#0f151a;
+    --ink:#e6eef2;
+    --muted:#a9b7c0;
+    --green:#22C55E;
+    --teal:#14B8A6;
+  }
 
-.pricing {
-  background: var(--bg);
-  color: var(--ink);
-  padding: 60px 20px;
-  text-align: center;
-}
+  .pricing{
+    background: var(--bg);
+    color: var(--ink);
+    padding: clamp(48px, 6vw, 96px) 20px;
+    text-align:center;
+  }
+  .pricing .container{max-width:1120px;margin:0 auto;}
+  .pricing h2{font-size:clamp(28px,3vw,44px);margin-bottom:40px;}
 
-.pricing h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-}
+  .pricing-grid{
+    display:grid;
+    gap:22px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  }
 
-.pricing-grid {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  justify-items: center;
-}
+  /* ===== CARD BASE ===== */
+  .price-card{
+    position:relative;
+    border-radius:20px;
+    background:linear-gradient(180deg,#0f151a,#0c1116);
+    border:1.5px solid rgba(34,197,94,.55);
+    padding:30px 26px;
+    box-shadow:0 0 0 2px rgba(34,197,94,.25) inset,0 14px 30px rgba(20,184,166,.10);
+    transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease,background .35s ease;
+    overflow:hidden;
+  }
 
-/* ====== Tarjeta ====== */
-.price-card {
-  background: var(--card);
-  border: 2px solid rgba(34, 197, 94, 0.5);
-  border-radius: 20px;
-  padding: 32px 24px;
-  width: 100%;
-  max-width: 340px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 0 1px rgba(34,197,94,.1);
-}
+  /* ===== BRILLO CIBERNÉTICO ===== */
+  .price-card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:inherit;
+    background:linear-gradient(135deg,var(--green),var(--teal));
+    opacity:.0;
+    z-index:-1;
+    filter:blur(12px);
+    transition:opacity .4s ease,transform .4s ease;
+  }
 
-.price-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(34,197,94,0.15),
-              0 0 12px rgba(34,197,94,0.25);
-  border-color: rgba(34,197,94,0.9);
-}
+  .price-card:hover::before,
+  .price-card:focus-within::before{
+    opacity:.8;
+    transform:scale(1.05);
+  }
 
-.price-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-}
+  /* ===== EFECTO HOVER ===== */
+  .price-card:hover,
+  .price-card:focus-within{
+    transform:translateY(-6px);
+    border-color:var(--green);
+    box-shadow:0 18px 38px rgba(0,0,0,.55),0 0 22px rgba(34,197,94,.25);
+    background:
+      radial-gradient(1200px 300px at 50% -20%,rgba(34,197,94,.10),transparent 60%),
+      linear-gradient(180deg,#111820,#0c1116 60%);
+  }
 
-.price-card .subtitle {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 16px;
-}
+  /* ===== TEXTOS ===== */
+  .price-card__head{margin-bottom:10px;}
+  .price-card__title{font-size:22px;margin:0 0 6px;}
+  .price-card__subtitle{color:var(--muted);margin:0 0 14px;font-size:15px;}
 
-.price-card .price {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 24px;
-}
+  .price-card__price{display:flex;justify-content:center;align-items:baseline;gap:4px;margin:16px 0 12px;}
+  .price-card .currency{font-size:28px;opacity:.9;}
+  .price-card .amount{font-size:54px;font-weight:700;}
 
-.price-card ul {
-  list-style: none;
-  padding: 0;
-  color: var(--muted);
-  line-height: 1.8;
-}
+  .price-card__features{margin:16px 0 28px;padding:0;list-style:none;}
+  .price-card__features li{color:var(--muted);margin:10px 0;}
+
+  .price-card__cta{
+    display:inline-block;
+    border-radius:12px;
+    padding:12px 16px;
+    background:#0b1319;
+    border:1px solid rgba(34,197,94,.4);
+    color:var(--ink);
+    text-decoration:none;
+    font-weight:600;
+    transition:all .25s ease;
+  }
+  .price-card__cta:hover,
+  .price-card__cta:focus-visible{
+    background:linear-gradient(180deg,rgba(34,197,94,.12),rgba(34,197,94,.06));
+    border-color:rgba(34,197,94,.8);
+    box-shadow:0 8px 22px rgba(34,197,94,.25);
+    transform:translateY(-1px);
+    outline:none;
+  }
+
+  .price-card:focus-visible{box-shadow:0 0 0 3px rgba(34,197,94,.6);}
+  @media(prefers-reduced-motion:reduce){.price-card,.price-card__cta{transition:none;}}
 </style>
-
 
 <!-- FAQ -->
 <section id="faq" class="section" aria-label="Preguntas frecuentes">
