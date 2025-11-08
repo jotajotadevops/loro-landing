@@ -165,6 +165,56 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 .nav--mobile a{padding:.4rem 0}
 
   </style>
+
+  <!-- ===========================
+     🎨 ESTILOS INTEGRADOS
+     =========================== -->
+<style>
+:root{
+  --loro-green: #22C55E;        /* Verde Loro */
+  --electric-orange: #FF6A00;   /* Naranja eléctrico */
+  --card-bg: #0f151a;           /* Fondo tarjetas */
+}
+
+/* Borde verde base reutilizable */
+.neon-border{
+  background: var(--card-bg);
+  border: 1.5px solid var(--loro-green);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 2px rgba(34,197,94,.12),
+    inset 0 0 24px rgba(34,197,94,.06);
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+/* Accesible con teclado */
+.neon-border:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.08),
+    0 0 0 6px rgba(34,197,94,.25);
+}
+
+/* Hover y foco en naranja eléctrico */
+.soluciones .neon-border:hover,
+.soluciones .neon-border:focus-visible{
+  border-color: var(--electric-orange);
+  box-shadow:
+    0 0 0 2px rgba(255,106,0,.25),
+    0 0 28px rgba(255,106,0,.20),
+    inset 0 0 30px rgba(255,106,0,.08);
+  transform: translateY(-2px);
+}
+
+/* Reduce animación si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce){
+  .neon-border{ transition: none; }
+}
+</style>
+
 </head>
 
   
