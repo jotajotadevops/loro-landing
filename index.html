@@ -10,7 +10,7 @@
   <meta property="og:title" content="Loro · Integramos IA en tu negocio" />
   <meta property="og:description" content="Automatizá ventas y soporte con WhatsApp + OpenAI. Flujos conversacionales reales." />
   <meta property="og:image" content="https://dummyimage.com/1200x630/0b0f12/f4f7f8.png&text=Loro" />
-  <link rel="icon" href="favicon.ico" />
+  <link rel="icon" href="Logo Loro.png" />
   <style>
 /* ============ Base “Loro” – estética sobria/seria, accesible y responsive ============ */
 
@@ -142,8 +142,16 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 
 /* Marca */
 .brand{display:flex;align-items:center;gap:.75rem}
-.brand__mark{width:32px;height:32px;border-radius:10px;display:inline-block;
-  background:linear-gradient(135deg,#34d399,#bef264)}
+.brand__mark {
+  width: 42px;         /* antes 32px */
+  height: 42px;        /* antes 32px */
+  object-fit: contain; /* mantiene proporción */
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -15px;   /* separa un poco del texto */
+  transform: translateY(2px); /* alinea visualmente sin agrandar header */
+}
+
 .brand__name{font-weight:700}
 
 /* Desktop / Mobile toggles */
@@ -328,10 +336,10 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   <!-- NAV -->
 <header class="header" role="banner">
   <div class="container header__bar">
-    <a href="#top" class="brand" aria-label="Inicio Loro">
-      <span class="brand__mark" aria-hidden="true"></span>
-      <strong class="brand__name">Loro</strong>
-    </a>
+<a href="#top" class="brand" aria-label="Inicio Loro">
+  <img src="logosinfondo.png" alt="Logo Loro" class="brand__mark">
+  <strong class="brand__name">Loro</strong>
+</a>
 
     <!-- Nav desktop -->
     <nav class="nav nav--desktop" aria-label="Navegación principal">
