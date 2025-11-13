@@ -114,7 +114,7 @@ strong{font-weight:700}
 .kpi__cap{color:var(--ink-2); font-size:.9rem}
 @media (min-width:900px){ .kpis{grid-template-columns:repeat(4,1fr)} }
 
-/* 11) FAQ */
+/* 11) FAQ (base) */
 details.faq{
   background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:var(--sp-5)
 }
@@ -137,19 +137,19 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important}
 }
 
-    /* Barra superior */
+/* Barra superior */
 .header__bar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 
 /* Marca */
 .brand{display:flex;align-items:center;gap:.75rem}
 .brand__mark {
-  width: 42px;         /* antes 32px */
-  height: 42px;        /* antes 32px */
-  object-fit: contain; /* mantiene proporción */
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
   display: inline-block;
   vertical-align: middle;
-  margin-right: -15px;   /* separa un poco del texto */
-  transform: translateY(2px); /* alinea visualmente sin agrandar header */
+  margin-right: -15px;
+  transform: translateY(2px);
 }
 
 .brand__name{font-weight:700}
@@ -171,7 +171,6 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 }
 .nav--mobile[data-open="true"]{display:flex}
 .nav--mobile a{padding:.4rem 0}
-
   </style>
 
   <!-- ===========================
@@ -224,56 +223,68 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 </style>
 
   <style>
-  /* ===== FAQ · Borde tech con flujo violeta ===== */
+  /* ===== FAQ · Borde tech con flujo verde ===== */
   :root{
-    --faq-bg:#0f151a;         /* ajusta a tu fondo */
-    --ink:#e7ecf0;            /* texto */
-    --violet:#9b5cff;         /* violeta principal */
-    --violet-2:#6a3eff;       /* acento */
+    --faq-bg:#0f151a;            /* fondo FAQ */
+    --faq-ink:#e7ecf0;           /* texto */
+    --faq-green:#22c55e;         /* verde principal */
+    --faq-green-2:#16a34a;       /* acento verde */
   }
 
   .faq-list{ display:grid; gap:14px; }
 
-  /* Soporta <details> o cualquier bloque con .faq-item */
-  details.faq-item, .faq-item{
+  /* Soporta <details> con .faq o cualquier bloque con .faq-item */
+  details.faq-item, .faq-item,
+  details.faq, .faq{
     position:relative;
     border-radius:16px;
     padding:18px 20px;
     background:var(--faq-bg);
-    color:var(--ink);
+    color:var(--faq-ink);
     outline:none;
     transition: transform .2s ease, box-shadow .2s ease;
   }
 
   /* Borde “tech”: capa base */
-  details.faq-item::before, .faq-item::before{
+  details.faq-item::before,
+  .faq-item::before,
+  details.faq::before,
+  .faq::before{
     content:"";
     position:absolute;
     inset:-1px;                      /* pinta por fuera del borde */
     border-radius:inherit;
-    padding:1px;                      /* grosor del borde */
+    padding:1px;                     /* grosor del borde */
     background:
-      radial-gradient(120px 40px at var(--mx,0%) var(--my,0%), color-mix(in oklab, var(--violet) 60%, transparent), transparent 60%) border-box,
+      radial-gradient(120px 40px at var(--mx,0%) var(--my,0%),
+        color-mix(in oklab, var(--faq-green) 60%, transparent),
+        transparent 60%
+      ) border-box,
       conic-gradient(from var(--angle,0deg),
         transparent 0 20%,
-        color-mix(in oklab, var(--violet), white 12%) 20% 25%,
+        color-mix(in oklab, var(--faq-green), white 12%) 20% 25%,
         transparent 25% 45%,
-        color-mix(in oklab, var(--violet-2), white 10%) 45% 50%,
+        color-mix(in oklab, var(--faq-green-2), white 10%) 45% 50%,
         transparent 50% 70%,
-        color-mix(in oklab, var(--violet), white 12%) 70% 75%,
-        transparent 75% 100%) border-box;
+        color-mix(in oklab, var(--faq-green), white 12%) 70% 75%,
+        transparent 75% 100%
+      ) border-box;
     -webkit-mask:
       linear-gradient(#000 0 0) content-box, 
       linear-gradient(#000 0 0);           /* recorta al borde */
     -webkit-mask-composite: xor;
             mask-composite: exclude;
-    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--violet) 35%, transparent));
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--faq-green) 35%, transparent));
     transition: filter .2s ease;
     animation: faq-flow 6s linear infinite paused;
+    pointer-events:none;   /* clave: no bloquea el click del summary */
   }
 
   /* Glow extra */
-  details.faq-item::after, .faq-item::after{
+  details.faq-item::after,
+  .faq-item::after,
+  details.faq::after,
+  .faq::after{
     content:"";
     position:absolute; inset:0;
     border-radius:inherit;
@@ -284,41 +295,54 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
 
   /* Interacciones */
   details.faq-item:hover, .faq-item:hover,
-  details.faq-item:focus-within, .faq-item:focus-within{
+  details.faq:hover, .faq:hover,
+  details.faq-item:focus-within, .faq-item:focus-within,
+  details.faq:focus-within, .faq:focus-within{
     transform: translateY(-1px);
     box-shadow: 0 8px 22px rgb(0 0 0 / .35);
   }
   details.faq-item:hover::before, .faq-item:hover::before,
-  details.faq-item:focus-within::before, .faq-item:focus-within::before{
+  details.faq:hover::before, .faq:hover::before,
+  details.faq-item:focus-within::before, .faq-item:focus-within::before,
+  details.faq:focus-within::before, .faq:focus-within::before{
     animation-play-state: running;          /* activa el flujo */
-    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--violet) 55%, transparent));
+    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--faq-green) 55%, transparent));
   }
   details.faq-item:hover::after, .faq-item:hover::after,
-  details.faq-item:focus-within::after, .faq-item:focus-within::after{
-    box-shadow: 0 0 22px 3px color-mix(in oklab, var(--violet) 35%, transparent) inset;
+  details.faq:hover::after, .faq:hover::after,
+  details.faq-item:focus-within::after, .faq-item:focus-within::after,
+  details.faq:focus-within::after, .faq:focus-within::after{
+    box-shadow: 0 0 22px 3px color-mix(in oklab, var(--faq-green) 35%, transparent) inset;
   }
 
   /* Cursor y accesibilidad para <summary> */
-  details.faq-item > summary{
+  details.faq-item > summary,
+  details.faq > summary{
     list-style:none; cursor:pointer; font-weight:600;
   }
-  details.faq-item > summary::-webkit-details-marker{ display:none; }
+  details.faq-item > summary::-webkit-details-marker,
+  details.faq > summary::-webkit-details-marker{ display:none; }
 
   /* Animación del flujo (gira el conic-gradient) */
   @keyframes faq-flow{
     to { --angle: 360deg; }
   }
 
-  /* Seguir el mouse para “orbe” violeta en el borde */
-  .faq-list .faq-item{ --mx:50%; --my:0%; }
+  /* Seguir el mouse para “orbe” verde en el borde */
+  .faq-list .faq-item,
+  .faq-list .faq{ --mx:50%; --my:0%; }
+
   @media (prefers-reduced-motion: reduce){
-    details.faq-item::before, .faq-item::before{ animation: none !important; }
+    details.faq-item::before,
+    .faq-item::before,
+    details.faq::before,
+    .faq::before{ animation: none !important; }
   }
 </style>
 <script>
   /* Opcional: mueve el brillo según el mouse */
   document.addEventListener('pointermove', (e)=>{
-    document.querySelectorAll('.faq-item').forEach(el=>{
+    document.querySelectorAll('.faq-item, .faq').forEach(el=>{
       const r = el.getBoundingClientRect();
       const x = ((e.clientX - r.left) / r.width) * 100;
       const y = ((e.clientY - r.top) / r.height) * 100;
@@ -327,6 +351,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   });
 </script>
+
 
 
 </head>
@@ -807,6 +832,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   });
   window.closeMenu = closeMenu;
 </script>
+
 
 
 
