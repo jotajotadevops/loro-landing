@@ -100,11 +100,25 @@ strong{font-weight:700}
 .nav a:hover{color:var(--ink)}
 
 /* 9) Hero */
-.hero{min-height:78vh; display:flex; align-items:center}
+.hero{
+  min-height:78vh;
+}
 .hero__art{
   aspect-ratio:4/3; border-radius:24px;
   background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));
   border:1px solid rgba(255,255,255,.1);
+
+  /* Igualar alturas entre columnas del HERO */
+.hero .grid {
+  align-items: stretch;   /* ambas columnas misma altura */
+}
+
+.hero .grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* texto arriba, KPIs abajo */
+  gap: var(--sp-4);
+
 }
 
 /* 10) Métricas */
@@ -1006,6 +1020,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
 
 
 
