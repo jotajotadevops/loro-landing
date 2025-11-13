@@ -100,25 +100,11 @@ strong{font-weight:700}
 .nav a:hover{color:var(--ink)}
 
 /* 9) Hero */
-.hero{
-  min-height:78vh;
-}
+.hero{min-height:78vh; display:flex; align-items:center}
 .hero__art{
   aspect-ratio:4/3; border-radius:24px;
   background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));
   border:1px solid rgba(255,255,255,.1);
-
-  /* Igualar alturas entre columnas del HERO */
-.hero .grid {
-  align-items: stretch;   /* ambas columnas misma altura */
-}
-
-.hero .grid > div:first-child {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* texto arriba, KPIs abajo */
-  gap: var(--sp-4);
-
 }
 
 /* 10) Métricas */
@@ -1020,6 +1006,980 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+/* 9) Hero */
+.hero{
+  min-height:78vh;
+}
+.hero__art{
+  aspect-ratio:4/3; border-radius:24px;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,0));
+  border:1px solid rgba(255,255,255,.1);
+
+  /* Igualar alturas entre columnas del HERO */
+.hero .grid {
+  align-items: stretch;   /* ambas columnas misma altura */
+}
+
+.hero .grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* texto arriba, KPIs abajo */
+  gap: var(--sp-4);
+
+}
+
+/* 10) Métricas */
+.kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-3)}
+.kpi{background:var(--bg-soft); border:1px solid var(--line); border-radius:18px; padding:var(--sp-4)}
+.kpi__num{font-weight:800; font-size:1.6r<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loro · Integramos IA en tu negocio</title>
+  <meta name="description" content="Loro: Integramos IA en tu negocio con OpenAI y WhatsApp Business. Automatizá las ventas recurrentes y que la IA responda las consultas." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Loro · Integramos IA en tu negocio" />
+  <meta property="og:description" content="Automatizá ventas y soporte con WhatsApp + OpenAI. Flujos conversacionales reales." />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0b0f12/f4f7f8.png&text=Loro" />
+  <link rel="icon" href="Logo Loro.png" />
+  <style>
+/* ============ Base “Loro” – estética sobria/seria, accesible y responsive ============ */
+
+/* 1) Reset moderno y tipografía */
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+     -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+/* 2) Paleta y tokens */
+:root{
+  --bg:#0b0f12;          /* fondo principal */
+  --bg-soft:#0f151a;     /* tarjetas/contraste suave */
+  --ink:#f4f7f8;         /* texto principal */
+  --ink-2:#c9d2d8;       /* texto secundario */
+  --line:#1b242c;        /* líneas/bordes discretos */
+  --accent:#22C55E;      /* acción/llamado */
+  --danger:#ef4444;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+  --container:1140px;
+  --sp-1:.5rem; --sp-2:.75rem; --sp-3:1rem; --sp-4:1.25rem; --sp-5:1.75rem; --sp-6:2.5rem; --sp-7:4rem;
+}
+
+@media (min-width:960px){
+  :root{ --sp-6:3rem; --sp-7:5rem }
+}
+
+/* 3) Colores generales */
+body{background:var(--bg); color:var(--ink)}
+a{color:inherit; text-decoration:none}
+img{max-width:100%; height:auto; display:block}
+
+/* 4) Tipografía y escalas */
+h1,h2,h3,h4{margin:0 0 var(--sp-3); line-height:1.15}
+h1{font-size:clamp(2rem,4vw,3rem); font-weight:800}
+h2{font-size:clamp(1.5rem,2.6vw,2rem); font-weight:700}
+h3{font-size:1.25rem; font-weight:650}
+p{margin:0 0 var(--sp-3); color:var(--ink-2)}
+small,.muted{color:var(--ink-2)}
+strong{font-weight:700}
+
+/* 5) Layout helpers */
+.container{max-width:var(--container); margin-inline:auto; padding-inline:var(--sp-3)}
+.section{padding:var(--sp-7) 0}
+.grid{display:grid; gap:var(--sp-4)}
+.grid-2{grid-template-columns:1fr; }
+.grid-3{grid-template-columns:1fr; }
+.grid-4{grid-template-columns:1fr; }
+@media (min-width:720px){
+  .grid-2{grid-template-columns:1fr 1fr}
+}
+@media (min-width:1000px){
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+  .grid-4{grid-template-columns:repeat(4,1fr)}
+}
+
+/* 6) Tarjetas y superficies */
+.card{
+  background:var(--bg-soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  box-shadow:none;
+}
+.card--elev{box-shadow:var(--shadow)}
+
+/* 7) Botones */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+  padding:.85rem 1.1rem; border-radius:12px; font-weight:600; line-height:1; cursor:pointer;
+  border:1px solid transparent; transition:.2s ease;
+}
+.btn--primary{background:var(--accent); color:#0b0f12}
+.btn--ghost{border-color:rgba(255,255,255,.14); background:transparent; color:var(--ink)}
+.btn--danger{background:var(--dangeem; color:var(--ink)}
+.kpi__cap{color:var(--ink-2); font-size:.9rem}
+@media (min-width:900px){ .kpis{grid-template-columns:repeat(4,1fr)} }
+
+/* 11) FAQ (base) */
+details.faq{
+  background:var(--bg-soft); border:1px solid var(--line); border-radius:14px; padding:var(--sp-5)
+}
+details.faq summary{cursor:pointer; font-weight:600}
+details.faq[open]{border-color:rgba(255,255,255,.22)}
+
+/* 12) Formularios */
+.input{
+  </style>
+
+  <!-- ===========================
+     🎨 ESTILOS INTEGRADOS
+     =========================== -->
+<style>
+:root{
+  --loro-green: #22C55E;        /* Verde Loro */
+  --electric-orange: #FF6A00;   /* Naranja eléctrico */
+  --card-bg: #0f151a;           /* Fondo tarjetas */
+}
+
+/* Borde verde base reutilizable */
+.neon-border{
+  background: var(--card-bg);
+  border: 1.5px solid var(--loro-green);
+  border-radius: 20px;
+  box-shadow:
+    0 0 0 2px rgba(34,197,94,.12),
+    inset 0 0 24px rgba(34,197,94,.06);
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+/* Accesible con teclado */
+.neon-border:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.08),
+    0 0 0 6px rgba(34,197,94,.25);
+}
+
+/* Hover y foco en naranja eléctrico */
+.soluciones .neon-border:hover,
+.soluciones .neon-border:focus-visible{
+  border-color: var(--electric-orange);
+  box-shadow:
+    0 0 0 2px rgba(255,106,0,.25),
+    0 0 28px rgba(255,106,0,.20),
+    inset 0 0 30px rgba(255,106,0,.08);
+  transform: translateY(-2px);
+}
+
+/* Reduce animación si el usuario lo prefiere */
+@media (prefers-reduced-motion: reduce){
+  .neon-border{ transition: none; }
+}
+</style>
+
+  <style>
+  /* ===== FAQ · Borde tech con flujo verde ===== */
+  :root{
+    --faq-bg:#0f151a;            /* fondo FAQ */
+    --faq-ink:#e7ecf0;           /* texto */
+    --faq-green:#22c55e;         /* verde principal */
+    --faq-green-2:#16a34a;       /* acento verde */
+  }
+
+  .faq-list{ display:grid; gap:14px; }
+
+  /* Soporta <details> con .faq o cualquier bloque con .faq-item */
+  details.faq-item, .faq-item,
+  details.faq, .faq{
+    position:relative;
+    border-radius:16px;
+    padding:18px 20px;
+    background:var(--faq-bg);
+    color:var(--faq-ink);
+    outline:none;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  /* Borde “tech”: capa base */
+  details.faq-item::before,
+  .faq-item::before,
+  details.faq::before,
+  .faq::before{
+    content:"";
+    position:absolute;
+    inset:-1px;                      /* pinta por fuera del borde */
+    border-radius:inherit;
+    padding:1px;                     /* grosor del borde */
+    background:
+      radial-gradient(120px 40px at var(--mx,0%) var(--my,0%),
+        color-mix(in oklab, var(--faq-green) 60%, transparent),
+        transparent 60%
+      ) border-box,
+      conic-gradient(from var(--angle,0deg),
+        transparent 0 20%,
+        color-mix(in oklab, var(--faq-green), white 12%) 20% 25%,
+        transparent 25% 45%,
+        color-mix(in oklab, var(--faq-green-2), white 10%) 45% 50%,
+        transparent 50% 70%,
+        color-mix(in oklab, var(--faq-green), white 12%) 70% 75%,
+        transparent 75% 100%
+      ) border-box;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box, 
+      linear-gradient(#000 0 0);           /* recorta al borde */
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    filter: drop-shadow(0 0 8px color-mix(in oklab, var(--faq-green) 35%, transparent));
+    transition: filter .2s ease;
+    animation: faq-flow 6s linear infinite paused;
+    pointer-events:none;   /* clave: no bloquea el click del summary */
+  }
+
+  /* Glow extra */
+  details.faq-item::after,
+  .faq-item::after,
+  details.faq::after,
+  .faq::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:inherit;
+    pointer-events:none;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+    transition: box-shadow .2s ease;
+  }
+
+  /* Interacciones */
+  details.faq-item:hover, .faq-item:hover,
+  details.faq:hover, .faq:hover,
+  details.faq-item:focus-within, .faq-item:focus-within,
+  details.faq:focus-within, .faq:focus-within{
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgb(0 0 0 / .35);
+  }
+  details.faq-item:hover::before, .faq-item:hover::before,
+  details.faq:hover::before, .faq:hover::before,
+  details.faq-item:focus-within::before, .faq-item:focus-within::before,
+  details.faq:focus-within::before, .faq:focus-within::before{
+    animation-play-state: running;          /* activa el flujo */
+    filter: drop-shadow(0 0 12px color-mix(in oklab, var(--faq-green) 55%, transparent));
+  }
+  details.faq-item:hover::after, .faq-item:hover::after,
+  details.faq:hover::after, .faq:hover::after,
+  details.faq-item:focus-within::after, .faq-item:focus-within::after,
+  details.faq:focus-within::after, .faq:focus-within::after{
+    box-shadow: 0 0 22px 3px color-mix(in oklab, var(--faq-green) 35%, transparent) inset;
+  }
+
+  /* Cursor y accesibilidad para <summary> */
+  details.faq-item > summary,
+  details.faq > summary{
+    list-style:none; cursor:pointer; font-weight:600;
+  }
+  details.faq-item > summary::-webkit-details-marker,
+  details.faq > summary::-webkit-details-marker{ display:none; }
+
+  /* Animación del flujo (gira el conic-gradient) */
+  @keyframes faq-flow{
+    to { --angle: 360deg; }
+  }
+
+  /* Seguir el mouse para “orbe” verde en el borde */
+  .faq-list .faq-item,
+  .faq-list .faq{ --mx:50%; --my:0%; }
+
+  @media (prefers-reduced-motion: reduce){
+    details.faq-item::before,
+    .faq-item::before,
+    details.faq::before,
+    .faq::before{ animation: none !important; }
+  }
+</style>
+<script>
+  /* Opcional: mueve el brillo según el mouse */
+  document.addEventListener('pointermove', (e)=>{
+    document.querySelectorAll('.faq-item, .faq').forEach(el=>{
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty('--mx', x + '%');
+      el.style.setProperty('--my', y + '%');
+    });
+  });
+</script>
+
+
+
+</head>
+
+  
+<body>
+  <!-- NAV -->
+  <header class="header" role="banner">
+    <div class="container header__bar">
+      <a href="#top" class="brand" aria-label="Inicio Loro">
+        <img src="logosinfondo.png" alt="Logo Loro" class="brand__mark">
+        <strong class="brand__name">Loro</strong>
+      </a>
+
+      <!-- Nav desktop -->
+      <nav class="nav nav--desktop" aria-label="Navegación principal">
+        <a href="#features">Soluciones</a>
+        <a href="#pricing">Precios</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto" class="btn btn--primary">Quiero una demo</a>
+      </nav>
+
+      <!-- Botón menú móvil -->
+      <button class="hamburger" id="menuBtn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Nav móvil -->
+    <nav id="mobileMenu" class="nav nav--mobile" aria-label="Navegación móvil" data-open="false">
+      <a href="#features" onclick="closeMenu()">Soluciones</a>
+      <a href="#pricing" onclick="closeMenu()">Precios</a>
+      <a href="#faq" onclick="closeMenu()">FAQ</a>
+      <a href="#contacto" class="btn btn--primary" onclick="closeMenu()">Quiero una demo</a>
+    </nav>
+  </header>
+
+<!-- HERO -->
+<section id="top" class="hero section" aria-label="Introducción">
+  <div class="container grid grid-2">
+    <div>
+      <h1>Automatizá ventas y soporte con IA real</h1>
+      <p class="muted">
+        WhatsApp Business + Open IA. Flujos conversacionales listos, con memoria.
+      </p>
+      <div class="grid" style="grid-template-columns:repeat(2,auto); gap:var(--sp-3)">
+        <a href="#contacto" class="btn btn--primary">Contactanos</a>
+        <a href="#features" class="btn btn--ghost">Ver soluciones</a>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpis" style="margin-top:var(--sp-5)">
+        <div class="kpi">
+          <div class="kpi__num">+10.000</div>
+          <div class="kpi__cap">VENTAS</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">+89%</div>
+          <div class="kpi__cap">EFICIENCIA</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">-65%</div>
+          <div class="kpi__cap">TIEMPO</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">+37%</div>
+          <div class="kpi__cap">CONVERSIÓN</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="hero__art">
+        <img
+          src="93bef519-011f-4708-adf3-86adafe35a9d.png"
+          alt="Ilustración de personas atendiendo consultas por WhatsApp con IA"
+          loading="lazy"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- FEATURES -->
+  <section id="features" class="section soluciones" aria-label="Soluciones">
+    <div class="container">
+      <h2>Soluciones clave</h2>
+      <p class="muted" style="max-width:640px; margin-bottom:var(--sp-4);">
+        Pensado para locales gastronómicos, retail, servicios y e-commerce que reciben decenas o cientos
+        de mensajes por día en WhatsApp.
+      </p>
+      <div class="grid grid-4">
+        <article class="card neon-border" tabindex="0" aria-label="Toma de pedidos automatizada">
+          <h3>Toma de pedidos automatizada</h3>
+          <p class="muted">
+            El cliente escribe como hablaría con un humano. Loro guía la conversación y registra el pedido
+            de punta a punta.
+          </p>
+        </article>
+
+        <article class="card neon-border" tabindex="0" aria-label="Respuestas a FAQs">
+          <h3>Respuestas a FAQs en segundos</h3>
+          <p class="muted">
+            80% de tus consultas son siempre similares: horarios, precios, envíos, medios de pago.
+            La IA las resuelve sin que intervengas.
+          </p>
+        </article>
+
+        <article class="card neon-border" tabindex="0" aria-label="Conversación con Memoria">
+          <h3>Conversación con memoria</h3>
+          <p class="muted">
+            Loro recuerda contexto: pedidos anteriores, preferencias, estado de una orden y datos
+            clave del cliente.
+          </p>
+        </article>
+
+        <article class="card neon-border" tabindex="0" aria-label="Integraciones">
+          <h3>Integrado a tus sistemas</h3>
+          <p class="muted">
+            Conectamos con WhatsApp Business API, Chatwoot, n8n, Google Sheets y más para registrar
+            ventas y métricas automáticamente.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING ========== -->
+  <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <h2 id="pricing-title">Planes según tu volumen de chats</h2>
+      <p class="muted" style="max-width:640px; margin:0 auto 32px;">
+        Hay un pago único de implementación (“One-Shot”) para configurar el agente y luego una suscripción
+        mensual según la cantidad de conversaciones.
+      </p>
+
+      <div class="pricing-grid">
+        <!-- Card 1 -->
+        <article class="price-card" tabindex="0">
+          <header class="price-card__head">
+            <h3 class="price-card__title">Starter</h3>
+            <p class="price-card__subtitle">Hasta 1.000 chats/mes</p>
+          </header>
+
+          <div class="price-card__price">
+            <span class="currency">US$</span><span class="amount">50</span>
+          </div>
+          <p class="muted" style="font-size:.85rem; margin-top:-4px;">+ implementación one-shot</p>
+
+          <ul class="price-card__features">
+            <li>Integración con WhatsApp Business API</li>
+            <li>Agente de IA entrenado con info de tu negocio</li>
+            <li>Registro de ventas básico (Sheets / CRM simple)</li>
+            <li>Soporte por WhatsApp y email</li>
+          </ul>
+
+          <a href="#contacto" class="price-card__cta">Quiero este plan</a>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="price-card price-card--featured" tabindex="0">
+          <header class="price-card__head">
+            <span class="badge">Más elegido</span>
+            <h3 class="price-card__title">Pro</h3>
+            <p class="price-card__subtitle">Hasta 5.000 chats/mes</p>
+          </header>
+
+          <div class="price-card__price">
+            <span class="currency">US$</span><span class="amount">109</span>
+          </div>
+          <p class="muted" style="font-size:.85rem; margin-top:-4px;">+ implementación one-shot</p>
+
+          <ul class="price-card__features">
+            <li>Todo lo del plan Starter</li>
+            <li>Flujos conversacionales avanzados (pedidos, reservas, etc.)</li>
+            <li>Reportes mensuales de métricas y desempeño</li>
+            <li>Hasta 3 marcas o sucursales</li>
+          </ul>
+
+          <a href="#contacto" class="price-card__cta">Quiero el plan Pro</a>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="price-card" tabindex="0">
+          <header class="price-card__head">
+            <h3 class="price-card__title">Empresa</h3>
+            <p class="price-card__subtitle">+5.000 chats/mes</p>
+          </header>
+
+          <div class="price-card__price">
+            <span class="amount">Custom</span>
+          </div>
+
+          <ul class="price-card__features">
+            <li>Arquitectura a medida para tu operación</li>
+            <li>Integraciones con sistemas internos (ERP, POS, etc.)</li>
+            <li>Soporte prioritario y acompañamiento</li>
+            <li>Entrenamiento continuo del agente</li>
+          </ul>
+
+          <a href="#contacto" class="price-card__cta">Hablar con ventas</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    :root{
+      --bg:#0b0f12;
+      --card:#0f151a;
+      --ink:#e6eef2;
+      --muted:#a9b7c0;
+      --green:#22C55E;
+      --teal:#14B8A6;
+    }
+
+    .pricing{
+      background: var(--bg);
+      color: var(--ink);
+      padding: clamp(48px, 6vw, 96px) 20px;
+      text-align:center;
+    }
+    .pricing .container{max-width:1120px;margin:0 auto;}
+    .pricing h2{font-size:clamp(28px,3vw,44px);margin-bottom:12px;}
+
+    .pricing-grid{
+      display:grid;
+      gap:22px;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    }
+
+    /* ===== CARD BASE ===== */
+    .price-card{
+      position:relative;
+      border-radius:20px;
+      background:linear-gradient(180deg,#0f151a,#0c1116);
+      border:1.5px solid rgba(34,197,94,.55);
+      padding:30px 26px;
+      box-shadow:0 0 0 2px rgba(34,197,94,.25) inset,0 14px 30px rgba(20,184,166,.10);
+      transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease,background .35s ease;
+      overflow:hidden;
+    }
+
+    /* Destacado */
+    .price-card--featured{
+      border-color:var(--teal);
+      box-shadow:0 18px 38px rgba(0,0,0,.65),0 0 26px rgba(20,184,166,.35);
+      transform:translateY(-4px);
+    }
+    .price-card--featured .price-card__title{
+      font-weight:700;
+    }
+    .badge{
+      display:inline-block;
+      margin-bottom:8px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:.75rem;
+      background:rgba(20,184,166,.18);
+      border:1px solid rgba(20,184,166,.7);
+    }
+
+    /* ===== BRILLO CIBERNÉTICO ===== */
+    .price-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      background:linear-gradient(135deg,var(--green),var(--teal));
+      opacity:.0;
+      z-index:-1;
+      filter:blur(12px);
+      transition:opacity .4s ease,transform .4s ease;
+    }
+
+    .price-card:hover::before,
+    .price-card:focus-within::before{
+      opacity:.8;
+      transform:scale(1.05);
+    }
+
+    /* ===== EFECTO HOVER ===== */
+    .price-card:hover,
+    .price-card:focus-within{
+      transform:translateY(-6px);
+      border-color:var(--green);
+      box-shadow:0 18px 38px rgba(0,0,0,.55),0 0 22px rgba(34,197,94,.25);
+      background:
+        radial-gradient(1200px 300px at 50% -20%,rgba(34,197,94,.10),transparent 60%),
+        linear-gradient(180deg,#111820,#0c1116 60%);
+    }
+
+    /* ===== TEXTOS ===== */
+    .price-card__head{margin-bottom:10px;}
+    .price-card__title{font-size:22px;margin:0 0 6px;}
+    .price-card__subtitle{color:var(--muted);margin:0 0 14px;font-size:15px;}
+
+    .price-card__price{display:flex;justify-content:center;align-items:baseline;gap:4px;margin:16px 0 12px;}
+    .price-card .currency{font-size:28px;opacity:.9;}
+    .price-card .amount{font-size:54px;font-weight:700;}
+
+    .price-card__features{margin:16px 0 28px;padding:0;list-style:none;}
+    .price-card__features li{color:var(--muted);margin:10px 0;}
+
+    .price-card__cta{
+      display:inline-block;
+      border-radius:12px;
+      padding:12px 16px;
+      background:#0b1319;
+      border:1px solid rgba(34,197,94,.4);
+      color:var(--ink);
+      text-decoration:none;
+      font-weight:600;
+      transition:all .25s ease;
+    }
+    .price-card__cta:hover,
+    .price-card__cta:focus-visible{
+      background:linear-gradient(180deg,rgba(34,197,94,.12),rgba(34,197,94,.06));
+      border-color:rgba(34,197,94,.8);
+      box-shadow:0 8px 22px rgba(34,197,94,.25);
+      transform:translateY(-1px);
+      outline:none;
+    }
+
+    .price-card:focus-visible{box-shadow:0 0 0 3px rgba(34,197,94,.6);}
+    @media(prefers-reduced-motion:reduce){.price-card,.price-card__cta{transition:none;}}
+  </style>
+
+  <!-- FAQ -->
+  <section id="faq" class="section" aria-label="Preguntas frecuentes">
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>¿Qué incluye la suscripción mensual?</summary>
+          <p class="muted">
+            Incluye el uso del agente de IA, mantenimiento, mejoras continuas y soporte. La implementación
+            inicial se cobra una sola vez para entrenar y configurar el sistema.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo es el proceso de integración?</summary>
+          <p class="muted">
+            En una llamada definimos tu caso de uso, conectamos tu WhatsApp Business, levantamos la
+            información de tu negocio (menú, servicios, precios, FAQs) y en aproximadamente una semana
+            dejamos la IA lista para salir a producción.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Se adapta a mi negocio e industria?</summary>
+          <p class="muted">
+            Sí. Loro se entrena con información específica de tu marca y tu operación: tipos de pedidos,
+            horarios, políticas, delivery, medios de pago, etc.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Es como un BOT tradicional?</summary>
+          <p class="muted">
+            No es un árbol de opciones rígido. Es un agente de IA que entiende lenguaje natural, mantiene
+            contexto y prioriza la experiencia del cliente.
+          </p>
+        </details>
+
+        <details class="faq-item">
+          <summary>¿Cómo hacemos para avanzar?</summary>
+          <p class="muted">
+            Agendamos una demo, te mostramos casos reales y, si tiene sentido, empezamos con un piloto en
+            uno de tus canales para medir impacto rápido.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section" aria-label="Contacto">
+    <div class="container grid grid-2">
+      <div>
+        <h2>Coordinemos una demo con tu caso real</h2>
+        <p class="muted">
+          Contanos brevemente tu negocio y el volumen de mensajes que manejás. Te mostramos cómo Loro
+          podría automatizar ventas y soporte en menos de 20 minutos.
+        </p>
+        <ul class="muted" style="line-height:1.8">
+          <li>📞 <a href="https://wa.me/+5491124037213">+54 9 11 2403-7213</a></li>
+          <li>✉️ <a href="mailto:hola@loro.com.ar">hola@loro.com.ar</a></li>
+        </ul>
+        <p class="muted" style="font-size:.85rem;">
+          Respondemos normalmente en menos de 24 hs hábiles.
+        </p>
+      </div>
+
+      <!-- Formulario contacto -->
+      <form id="contactForm"
+            class="card"
+            aria-label="Formulario de contacto"
+            method="post"
+            target="hidden_iframe"
+            novalidate>
+        <label class="label" for="f-nombre">Nombre</label>
+        <input id="f-nombre" name="nombre" class="input" placeholder="Tu nombre" autocomplete="name" required>
+
+        <label class="label" for="f-email">Mail</label>
+        <input id="f-email" type="email" name="email" class="input" placeholder="tu@email.com"
+               autocomplete="email" required>
+
+        <label class="label" for="f-telefono">Teléfono</label>
+        <input id="f-telefono" type="tel" name="telefono" class="input" inputmode="tel"
+               placeholder="+54 9 11 1234-5678" autocomplete="tel">
+
+        <label class="label" for="f-industria">Industria</label>
+        <select id="f-industria" name="industria" class="input">
+          <option value="">Seleccioná…</option>
+          <option>Gastronomía</option><option>Retail</option><option>Servicios</option>
+          <option>E-commerce</option><option>Educación</option><option>Otra</option>
+        </select>
+
+        <label class="label" for="f-mensajes">Mensajes recibidos mensualmente</label>
+        <select id="f-mensajes" name="mensajes_mensuales" class="input">
+          <option value="">Seleccioná…</option>
+          <option>0–500</option><option>500–1.000</option><option>1.000–5.000</option>
+          <option>5.000–10.000</option><option>+10.000</option>
+        </select>
+
+        <label class="label" for="f-comentario">Comentario</label>
+        <textarea id="f-comentario" name="comentario" rows="4" class="input"
+                  placeholder="Contanos sobre tu negocio"></textarea>
+
+        <!-- honeypot anti-spam -->
+        <input type="text" name="website" style="position:absolute;left:-9999px"
+               tabindex="-1" autocomplete="off">
+
+        <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-3)">
+          <button class="btn btn--primary" type="submit" id="submitBtn">Enviar</button>
+          <a class="btn btn--ghost" href="mailto:hola@loro.com.ar">Escribir por email</a>
+        </div>
+
+        <div id="formMsg" class="muted" style="margin-top:var(--sp-3)"></div>
+      </form>
+      <iframe name="hidden_iframe" style="display:none"></iframe>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3)">
+      <div>© <span id="year"></span> Loro. Todos los derechos reservados.</div>
+      <div style="font-size:.85rem">Hecho con ❤️ en Argentina</div>
+    </div>
+  </footer>
+
+  <!-- Año + menú móvil -->
+  <script>
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    const btnMenu = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function closeMenu(){
+      if(mobileMenu && btnMenu){
+        mobileMenu.dataset.open = 'false';
+        btnMenu.setAttribute('aria-expanded','false');
+      }
+    }
+
+    btnMenu?.addEventListener('click', () => {
+      if(!mobileMenu || !btnMenu) return;
+      const open = mobileMenu.dataset.open === 'true';
+      mobileMenu.dataset.open = (!open).toString();
+      btnMenu.setAttribute('aria-expanded', (!open).toString());
+    });
+
+    window.closeMenu = closeMenu;
+  </script>
+
+  <!-- =============================
+       DB: Supabase + fallback Apps Script
+       ============================= -->
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    // 🔐 TUS CREDENCIALES (anon pública + URL del proyecto)
+    const SUPABASE_URL = 'https://nxhpesrmhkyzdqcpoxtq.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im54aHBlc3JtaGt5emRxY3BveHRxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzODMzNjcsImV4cCI6MjA3Nzk1OTM2N30.xe9ntt5uBGlRAl3cYehjQswKJ51nk1aJyIXnKEzExI8';
+
+    // ⚠️ Reemplazá esto por tu Apps Script real si querés backup adicional
+    const APPS_SCRIPT_ENDPOINT = 'https://script.google.com/macros/s/TU_ID/exec';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    const form   = document.getElementById('contactForm');
+    const msg    = document.getElementById('formMsg');
+    const btn    = document.getElementById('submitBtn');
+
+    if (!form || !btn) console.warn('Form no encontrado.');
+
+    try {
+      await supabase.from('leads').select('id').limit(1);
+      console.log('✅ Conectado a Supabase');
+    } catch (e) {
+      console.warn('⚠️ No se pudo verificar Supabase en el cliente:', e);
+    }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      msg.textContent = '';
+      btn.disabled = true; btn.textContent = 'Enviando…';
+
+    /* ====== HERO GRID 2x2 ====== */
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  grid-template-rows:auto auto;
+  gap:var(--sp-4);
+  align-items:stretch;
+}
+.hero .grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  justify-content: center; /* centra el contenido verticalmente */
+}
+/* Arriba izquierda */
+.hero__top-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:var(--sp-3);
+}
+
+.hero__eyebrow{
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+
+/* Botones */
+.hero__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--sp-3);
+}
+
+/* Arriba derecha: panel grande */
+.hero__top-right{
+  display:flex;
+  align-items:stretch;
+}
+.hero__art{
+  width:100%;
+  border-radius:32px;
+  min-height:260px;
+  background:radial-gradient(circle at 0 0, rgba(34,197,94,.18), transparent 55%),
+             radial-gradient(circle at 100% 0, rgba(20,184,166,.16), transparent 55%),
+             #05070a;
+  box-shadow:0 24px 60px rgba(0,0,0,.7);
+}
+
+/* Abajo izquierda: KPIs alineadas como bloque */
+.hero__bottom-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap:var(--sp-2);
+}
+.hero__note{
+  font-size:.85rem;
+}
+
+/* Abajo derecha: card alineada con KPIs */
+.hero__bottom-right{
+  display:flex;
+  align-items:flex-end;
+}
+.hero__card{
+  margin:0; /* quita el margin-top inline que tenías */
+}
+.hero__list{
+  list-style:none;
+  padding:0;
+  margin:var(--sp-2) 0;
+  display:grid;
+  gap:.4rem;
+}
+.hero__small{
+  font-size:.85rem;
+}
+
+/* Responsive: en mobile se apila todo en 1 columna */
+@media (max-width: 768px){
+  .hero__grid{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+  .hero__top-right,
+  .hero__bottom-right{
+    align-items:stretch;
+  }
+  .hero__art{
+    min-height:200px;
+  }
+}
+
+
+      // Honeypot
+      if (form.website && form.website.value) {
+        btn.disabled = false; btn.textContent = 'Enviar';
+        return;
+      }
+
+      const payload = {
+        nombre: form.nombre.value.trim(),
+        email: form.email.value.trim(),
+        telefono: form.telefono.value.trim(),
+        industria: form.industria.value || null,
+        mensajes_mensuales: form.mensajes_mensuales.value || null,
+        comentario: form.comentario.value.trim(),
+        origen: location.host,
+        ts: new Date().toISOString()
+      };
+
+      try {
+        // 1) Guarda en BD (tabla "leads")
+        const { error } = await supabase.from('leads').insert(payload);
+        if (error) throw error;
+
+        // 2) Backup opcional en Apps Script (si configuraste endpoint)
+        if (APPS_SCRIPT_ENDPOINT && APPS_SCRIPT_ENDPOINT.includes('TU_ID') === false) {
+          await fetch(APPS_SCRIPT_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        }
+
+        msg.style.color = 'var(--ink)';
+        msg.textContent = '¡Gracias! Recibimos tu consulta y te contactamos pronto.';
+        form.reset();
+      } catch (err) {
+        console.error(err);
+        msg.style.color = '#22C55E';
+        msg.textContent = 'Muchas gracias por compartir tu contacto, nos estaremos comunicando a la brevedad.';
+      } finally {
+        btn.disabled = false; btn.textContent = 'Enviar';
+      }
+    });
+  </script>
+</body>
+
 
 
 
