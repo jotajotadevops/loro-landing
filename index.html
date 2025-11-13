@@ -100,7 +100,20 @@ strong{font-weight:700}
 .nav a:hover{color:var(--ink)}
 
 /* 9) Hero */
-.hero{min-height:78vh; display:flex; align-items:center}
+.hero{
+  min-height:78vh;
+}
+
+.hero .grid {
+  align-items: stretch;
+}
+
+.hero .grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
 
 }
 
@@ -1003,6 +1016,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
 
 
 
