@@ -389,64 +389,72 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section id="top" class="hero section" aria-label="Introducción">
-    <div class="container grid grid-2">
-      <div>
-        <p class="muted" style="font-size:.9rem; text-transform:uppercase; letter-spacing:.08em;">
-          WhatsApp Business + IA para negocios reales
-        </p>
-        <h1>Convertí consultas de WhatsApp en ventas automáticas</h1>
-        <p class="muted">
-          Loro integra IA en tu negocio para tomar pedidos, responder consultas repetitivas y
-          registrar ventas desde WhatsApp, sin que tengas que estar pegado al celular.
-        </p>
-        <div class="grid" style="grid-template-columns:repeat(2,auto); gap:var(--sp-3)">
-          <a href="#contacto" class="btn btn--primary">Agendar demo</a>
-          <a href="#features" class="btn btn--ghost">Ver cómo funciona</a>
-        </div>
-
-        <!-- KPIs -->
-        <div class="kpis" style="margin-top:var(--sp-5)">
-          <div class="kpi">
-            <div class="kpi__num">+10.000</div>
-            <div class="kpi__cap">ventas procesadas</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi__num">+39%</div>
-            <div class="kpi__cap">satisfacción del cliente</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi__num">-65%</div>
-            <div class="kpi__cap">tiempo de respuesta</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi__num">+37%</div>
-            <div class="kpi__cap">conversiones en ventas</div>
-          </div>
-        </div>
-        <p class="muted" style="margin-top:var(--sp-2); font-size:.85rem;">
-          Datos de implementaciones reales en locales gastronómicos y comercios de la región.
-        </p>
-      </div>
-
-      <div>
-        <div class="hero__art" aria-hidden="true"></div>
-        <article class="card neon-border" style="margin-top:var(--sp-4);">
-          <h2 style="font-size:1.15rem; margin-bottom:var(--sp-2);">¿Qué hace Loro en tu negocio?</h2>
-          <ul class="muted" style="list-style:none; padding:0; margin:0; display:grid; gap:.5rem;">
-            <li>🟢 Toma pedidos por WhatsApp en formato conversacional.</li>
-            <li>🟢 Responde horarios, precios, envíos y medios de pago.</li>
-            <li>🟢 Mantiene memoria por cliente y contexto de la conversación.</li>
-            <li>🟢 Se integra con tus herramientas: Chatwoot, n8n, Google Sheets y más.</li>
-          </ul>
-          <p class="muted" style="font-size:.85rem; margin-top:var(--sp-2);">
-            En una semana dejamos todo listo para que la IA empiece a vender por vos.
-          </p>
-        </article>
+ <!-- HERO -->
+<section id="top" class="hero section" aria-label="Introducción">
+  <div class="container hero__grid">
+    <!-- Arriba izquierda -->
+    <div class="hero__top-left">
+      <p class="muted hero__eyebrow">
+        WHATSAPP BUSINESS + IA PARA NEGOCIOS REALES
+      </p>
+      <h1>Convertí consultas de WhatsApp en ventas automáticas</h1>
+      <p class="muted">
+        Loro integra IA en tu negocio para tomar pedidos, responder consultas repetitivas y
+        registrar ventas desde WhatsApp, sin que tengas que estar pegado al celular.
+      </p>
+      <div class="hero__actions">
+        <a href="#contacto" class="btn btn--primary">Agendar demo</a>
+        <a href="#features" class="btn btn--ghost">Ver cómo funciona</a>
       </div>
     </div>
-  </section>
+
+    <!-- Arriba derecha -->
+    <div class="hero__top-right">
+      <div class="hero__art" aria-hidden="true"></div>
+    </div>
+
+    <!-- Abajo izquierda -->
+    <div class="hero__bottom-left">
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi__num">+10.000</div>
+          <div class="kpi__cap">ventas procesadas</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">+39%</div>
+          <div class="kpi__cap">satisfacción del cliente</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">-65%</div>
+          <div class="kpi__cap">tiempo de respuesta</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__num">+37%</div>
+          <div class="kpi__cap">conversiones en ventas</div>
+        </div>
+      </div>
+      <p class="muted hero__note">
+        Datos de implementaciones reales en locales gastronómicos y comercios de la región.
+      </p>
+    </div>
+
+    <!-- Abajo derecha -->
+    <div class="hero__bottom-right">
+      <article class="card neon-border hero__card">
+        <h2>¿Qué hace Loro en tu negocio?</h2>
+        <ul class="muted hero__list">
+          <li>🟢 Toma pedidos por WhatsApp en formato conversacional.</li>
+          <li>🟢 Responde horarios, precios, envíos y medios de pago.</li>
+          <li>🟢 Mantiene memoria por cliente y contexto de la conversación.</li>
+          <li>🟢 Se integra con tus herramientas: Chatwoot, n8n, Google Sheets y más.</li>
+        </ul>
+        <p class="muted hero__small">
+          En una semana dejamos todo listo para que la IA empiece a vender por vos.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
 
   <!-- FEATURES -->
   <section id="features" class="section soluciones" aria-label="Soluciones">
@@ -878,6 +886,97 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       msg.textContent = '';
       btn.disabled = true; btn.textContent = 'Enviando…';
 
+    /* ====== HERO GRID 2x2 ====== */
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
+  grid-template-rows:auto auto;
+  gap:var(--sp-4);
+  align-items:stretch;
+}
+
+/* Arriba izquierda */
+.hero__top-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:var(--sp-3);
+}
+
+.hero__eyebrow{
+  font-size:.8rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+}
+
+/* Botones */
+.hero__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--sp-3);
+}
+
+/* Arriba derecha: panel grande */
+.hero__top-right{
+  display:flex;
+  align-items:stretch;
+}
+.hero__art{
+  width:100%;
+  border-radius:32px;
+  min-height:260px;
+  background:radial-gradient(circle at 0 0, rgba(34,197,94,.18), transparent 55%),
+             radial-gradient(circle at 100% 0, rgba(20,184,166,.16), transparent 55%),
+             #05070a;
+  box-shadow:0 24px 60px rgba(0,0,0,.7);
+}
+
+/* Abajo izquierda: KPIs alineadas como bloque */
+.hero__bottom-left{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap:var(--sp-2);
+}
+.hero__note{
+  font-size:.85rem;
+}
+
+/* Abajo derecha: card alineada con KPIs */
+.hero__bottom-right{
+  display:flex;
+  align-items:flex-end;
+}
+.hero__card{
+  margin:0; /* quita el margin-top inline que tenías */
+}
+.hero__list{
+  list-style:none;
+  padding:0;
+  margin:var(--sp-2) 0;
+  display:grid;
+  gap:.4rem;
+}
+.hero__small{
+  font-size:.85rem;
+}
+
+/* Responsive: en mobile se apila todo en 1 columna */
+@media (max-width: 768px){
+  .hero__grid{
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+  .hero__top-right,
+  .hero__bottom-right{
+    align-items:stretch;
+  }
+  .hero__art{
+    min-height:200px;
+  }
+}
+
+
       // Honeypot
       if (form.website && form.website.value) {
         btn.disabled = false; btn.textContent = 'Enviar';
@@ -922,6 +1021,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
 
 
 
