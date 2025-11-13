@@ -100,26 +100,41 @@ strong{font-weight:700}
 .nav a:hover{color:var(--ink)}
 
 /* 9) Hero */
+.hero{
+  min-height:78vh;
+  display:flex;
+  align-items:center;
+}
+
+.hero .grid{
+  align-items:stretch;            /* columnas misma altura */
+}
+
+.hero .grid > div:first-child{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;  /* título + KPIs ocupan todo el alto */
+  gap:var(--sp-4);
+}
+
 .hero__art{
-  width: 100%;
-  max-width: 460px;        /* controla el ancho del panel */
-  aspect-ratio: 1 / 1;     /* 👈 cuadrado */
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.1);
-  background: #0d1117;     /* fondo oscuro similar a la landing */
-  margin-left: auto;       /* empuja hacia la derecha */
+  width:100%;
+  max-width:460px;        /* controla el ancho del panel */
+  aspect-ratio:1 / 1;     /* 👈 cuadrado */
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  background:#0d1117;     /* fondo oscuro similar a la landing */
+  margin-left:auto;       /* lo empuja a la derecha */
 }
 
 .hero__art img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  width:100%;
+  height:100%;
+  object-fit:cover;       /* recorta la ilustración para que llene el cuadrado */
+  display:block;
 }
 
-
-}
 
 /* 10) Métricas */
 .kpis{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-3)}
@@ -880,108 +895,6 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
       msg.textContent = '';
       btn.disabled = true; btn.textContent = 'Enviando…';
 
-    /* ====== HERO GRID 2x2 ====== */
-.hero__grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
-  grid-template-rows:auto auto;
-  gap:var(--sp-4);
-  align-items:stretch;
-}
-.hero .grid > div:first-child {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--sp-4); /* centra el contenido verticalmente */
-}
-/* Arriba izquierda */
-.hero__top-left{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  gap:var(--sp-3);
-}
-
-.hero__eyebrow{
-  font-size:.8rem;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-}
-
-/* Botones */
-.hero__actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:var(--sp-3);
-}
-
-/* Arriba derecha: panel grande */
-.hero__top-right{
-  display:flex;
-  align-items:stretch;
-}
-.hero__art{
-  width: 100%;
-  max-width: 460px;        /* controla el ancho del panel */
-  aspect-ratio: 1 / 1;     /* 👈 vuelve al cuadrado */
-  border-radius: 24px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.1);
-  background: #0d1117;     /* fondo oscuro similar a la landing */
-  margin-left: auto;       /* empuja hacia la derecha */
-}
-
-.hero__art img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;       /* recorta la imagen para rellenar */
-  display: block;
-}
-
-
-/* Abajo izquierda: KPIs alineadas como bloque */
-.hero__bottom-left{
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  gap:var(--sp-2);
-}
-.hero__note{
-  font-size:.85rem;
-}
-
-/* Abajo derecha: card alineada con KPIs */
-.hero__bottom-right{
-  display:flex;
-  align-items:flex-end;
-}
-.hero__card{
-  margin:0; /* quita el margin-top inline que tenías */
-}
-.hero__list{
-  list-style:none;
-  padding:0;
-  margin:var(--sp-2) 0;
-  display:grid;
-  gap:.4rem;
-}
-.hero__small{
-  font-size:.85rem;
-}
-
-/* Responsive: en mobile se apila todo en 1 columna */
-@media (max-width: 768px){
-  .hero__grid{
-    grid-template-columns:1fr;
-    grid-template-rows:auto;
-  }
-  .hero__top-right,
-  .hero__bottom-right{
-    align-items:stretch;
-  }
-
-}
-
 
       // Honeypot
       if (form.website && form.website.value) {
@@ -1027,6 +940,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
 
 
 
