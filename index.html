@@ -868,7 +868,12 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
   gap:var(--sp-4);
   align-items:stretch;
 }
-
+.hero .grid > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  justify-content: center; /* centra el contenido verticalmente */
+}
 /* Arriba izquierda */
 .hero__top-left{
   display:flex;
@@ -995,6 +1000,7 @@ details.faq[open]{border-color:rgba(255,255,255,.22)}
     });
   </script>
 </body>
+
 
 
 
